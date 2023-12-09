@@ -10,7 +10,7 @@ export default function Header() {
           </div>
           <div className="header__logo _dark">
             <a href="" target="_self">
-              <img src="images/logo_dark.png" alt="logo" />
+              <img src="./public/images/logo_dark.png" alt="logo" />
             </a>
           </div>
           <nav className="header__nav">
