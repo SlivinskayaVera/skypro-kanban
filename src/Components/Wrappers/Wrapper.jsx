@@ -1,5 +1,5 @@
 import CardTask from "../Cards/CardTask.jsx";
-import tasksList from "../Data/TasksList.jsx";
+import tasksList from "../../Data/TasksList.jsx";
 import MainColumn from "../Columns/MainColumn.jsx";
 
 export default function Wrapper({ children }) {
