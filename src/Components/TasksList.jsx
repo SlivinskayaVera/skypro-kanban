@@ -1,20 +1,20 @@
 const tasksList = [
     {
-      task: "Web Design",
+      id: 0,
+      name: "Web Design",
       colorTheme: "_orange",
-      cardThemeAndColor: "card__theme _orange",
     },
 
     {
-      task: "Research",
+      id: 1,
+      name: "Research",
       colorTheme: "_green",
-      cardThemeAndColor: "card__theme _green",
     },
 
     {
-      task: "Copywriting",
+      id: 2,
+      name: "Copywriting",
       colorTheme: "_purple",
-      cardThemeAndColor: "card__theme _purple",
     },
   ];
 
