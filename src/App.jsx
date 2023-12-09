@@ -1,14 +1,12 @@
 import "./App.css";
-import Wrapper from './Components/Wrapper.jsx';
-import PopExit from './Components/Pops/PopExit.jsx';
+import Wrapper from "./Components/Wrappers/Wrapper.jsx";
+import PopExit from "./Components/Pops/PopExit.jsx";
 import PopNewCard from "./Components/Pops/PopNewCard.jsx";
 import PopBrowse from "./Components/Pops/PopBrowse.jsx";
-import Header from "./Components/Header.jsx";
-
+import Header from "./Components/Header/Header.jsx";
 
 function App() {
-
-  return (      
+  return (
     <Wrapper>
       <PopExit />
       <PopNewCard />

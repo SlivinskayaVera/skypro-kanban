@@ -1,6 +1,6 @@
-import CardItem from "./CardItem.jsx";
-import tasksList from "./TasksList.jsx";
-import MainColumn from "./MainColumn.jsx";
+import CardTask from "../Cards/CardTask.jsx";
+import tasksList from "../Data/TasksList.jsx";
+import MainColumn from "../Columns/MainColumn.jsx";
 
 export default function Wrapper({ children }) {
   return (
@@ -13,45 +13,45 @@ export default function Wrapper({ children }) {
         <div className="container">
           <div className="main__block">
             <div className="main__content">
-            <MainColumn nameColomn={'Без статуса'}>
+              <MainColumn nameColomn={"Без статуса"}>
                 {tasksList.map((task) => (
-                  <CardItem
+                  <CardTask
                     name={task.name}
                     colorTheme={task.colorTheme}
                     key={task.id}
                   />
                 ))}
               </MainColumn>
-              <MainColumn nameColomn={'Надо сделать'}>
+              <MainColumn nameColomn={"Надо сделать"}>
                 {tasksList.map((task) => (
-                  <CardItem
+                  <CardTask
                     name={task.name}
                     colorTheme={task.colorTheme}
                     key={task.id}
                   />
                 ))}
               </MainColumn>
-              <MainColumn nameColomn={'В работе'}>
+              <MainColumn nameColomn={"В работе"}>
                 {tasksList.map((task) => (
-                  <CardItem
+                  <CardTask
                     name={task.name}
                     colorTheme={task.colorTheme}
                     key={task.id}
                   />
                 ))}
               </MainColumn>
-              <MainColumn nameColomn={'Тестирование'}>
+              <MainColumn nameColomn={"Тестирование"}>
                 {tasksList.map((task) => (
-                  <CardItem
+                  <CardTask
                     name={task.name}
                     colorTheme={task.colorTheme}
                     key={task.id}
                   />
                 ))}
               </MainColumn>
-              <MainColumn nameColomn={'Готово'}>
+              <MainColumn nameColomn={"Готово"}>
                 {tasksList.map((task) => (
-                  <CardItem
+                  <CardTask
                     name={task.name}
                     colorTheme={task.colorTheme}
                     key={task.id}

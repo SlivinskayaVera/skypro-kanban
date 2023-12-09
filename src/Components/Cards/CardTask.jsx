@@ -1,5 +1,4 @@
-function CardItem({ name, colorTheme }) {
-
+function CardTask({ name, colorTheme }) {
   return (
     <div className="cards__item">
       <div className="cards__card card">
@@ -56,4 +55,4 @@ function CardItem({ name, colorTheme }) {
   );
 }
 
-export default CardItem;
+export default CardTask;
