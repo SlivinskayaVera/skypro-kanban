@@ -1,11 +1,10 @@
-function CardItem({ task, colorTheme, cardThemeAndColor }) {
-
+function CardTask({ name, colorTheme }) {
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
-          <div className={cardThemeAndColor}>
-            <p className={colorTheme}>{task}</p>
+          <div className={`card__theme ${colorTheme}`}>
+            <p className={colorTheme}>{name}</p>
           </div>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
@@ -56,4 +55,4 @@ function CardItem({ task, colorTheme, cardThemeAndColor }) {
   );
 }
 
-export default CardItem;
+export default CardTask;
