@@ -1,4 +1,4 @@
-import MainContentWrapper from './MainContantWrapper.jsx'
+import MainContentWrapper from "./MainContantWrapper.jsx";
 
 export default function PageWrapper({ children }) {
   return (
