@@ -1,57 +1,26 @@
-import CardTask from "../Cards/CardTask.jsx";
-import tasksList from "../../Data/TasksList.jsx";
 import MainColumn from "../Columns/MainColumn.jsx";
+// import { cardList } from "../../../data.js";
 
-export default function MainContentWrapper() {
+export default function MainContentWrapper({cards}) {
+  const statusList = [
+    "Без статуса",
+    "Нужно сделать",
+    "В работе",
+    "Тестирование",
+    "Готово",
+  ];
+
   return (
     <div className="container">
       <div className="main__block">
         <div className="main__content">
-          <MainColumn nameColomn={"Без статуса"}>
-            {tasksList.map((task) => (
-              <CardTask
-                name={task.name}
-                colorTheme={task.colorTheme}
-                key={task.id}
-              />
-            ))}
-          </MainColumn>
-          <MainColumn nameColomn={"Надо сделать"}>
-            {tasksList.map((task) => (
-              <CardTask
-                name={task.name}
-                colorTheme={task.colorTheme}
-                key={task.id}
-              />
-            ))}
-          </MainColumn>
-          <MainColumn nameColomn={"В работе"}>
-            {tasksList.map((task) => (
-              <CardTask
-                name={task.name}
-                colorTheme={task.colorTheme}
-                key={task.id}
-              />
-            ))}
-          </MainColumn>
-          <MainColumn nameColomn={"Тестирование"}>
-            {tasksList.map((task) => (
-              <CardTask
-                name={task.name}
-                colorTheme={task.colorTheme}
-                key={task.id}
-              />
-            ))}
-          </MainColumn>
-          <MainColumn nameColomn={"Готово"}>
-            {tasksList.map((task) => (
-              <CardTask
-                name={task.name}
-                colorTheme={task.colorTheme}
-                key={task.id}
-              />
-            ))}
-          </MainColumn>
+          {statusList.map((status) => (
+            <MainColumn
+              key={status}
+              title={status}
+              cardList={cards.filter((card) => card.status === status)}
+            />
+          ))}
         </div>
       </div>
     </div>

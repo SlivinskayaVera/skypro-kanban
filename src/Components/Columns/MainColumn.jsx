@@ -1,11 +1,21 @@
-export default function MainColumn({nameColomn: nameColumn, children}) {
+import CardTask from "../Cards/CardTask.jsx";
+
+export default function MainColumn({ title, cardList }) {
   return (
     <div className="main__column">
       <div className="column__title">
-        <p>{nameColumn}</p>
+        <p>{title}</p>
       </div>
       <div className="cards">
-        {children}
+        {cardList.map((card) => (
+          <CardTask
+            key={card.id}
+            colorTheme={card.colorTheme}
+            theme={card.theme}
+            title={card.title}
+            date={card.date}
+          />
+        ))}
       </div>
     </div>
   );
