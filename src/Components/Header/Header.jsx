@@ -33,7 +33,7 @@ function openMenu () {
             <a onClick={openMenu} href="#user-set-target" className="header__user _hover02">
               Ivan Ivanov
             </a>
-            {isOpen ? <div 
+            {isOpen && (<div 
               className="header__pop-user-set pop-user-set"
               id="user-set-target"
             >
@@ -47,7 +47,7 @@ function openMenu () {
               <button type="button" className="_hover03">
                 <a href="#popExit">Выйти</a>
               </button>
-            </div> : ''}
+            </div>)}
           </nav>
         </div>
       </div>
