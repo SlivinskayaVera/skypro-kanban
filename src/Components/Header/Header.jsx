@@ -4,7 +4,7 @@ export default function Header({ addCard }) {
 const [isOpen, setIsOpen] = useState(false);
 
 function openMenu () {
-  setIsOpen(!isOpen)
+  setIsOpen(previous => !previous)
 }
 
   return (
