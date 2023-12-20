@@ -39,9 +39,7 @@ function App() {
       {IsLoading ? (
         <h1>Downloading, wait...</h1>
       ) : (
-        <main className="main">
-          <MainContentWrapper cards={cards} />
-        </main>
+        <MainContentWrapper cards={cards} />
       )}
     </PageWrapper>
   );
