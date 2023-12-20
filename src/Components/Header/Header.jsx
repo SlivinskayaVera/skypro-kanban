@@ -1,4 +1,12 @@
-export default function Header({addCard}) {
+import { useState } from "react";
+export default function Header({ addCard }) {
+
+const [isOpen, setIsOpen] = useState(false);
+
+function openMenu () {
+  setIsOpen(!isOpen)
+}
+
   return (
     <header className="header">
       <div className="container">
@@ -14,14 +22,18 @@ export default function Header({addCard}) {
             </a>
           </div>
           <nav className="header__nav">
-            <button onClick={addCard} className="header__btn-main-new _hover01" id="btnMainNew">
+            <button
+              onClick={addCard}
+              className="header__btn-main-new _hover01"
+              id="btnMainNew"
+            >
               {/* <a href="#popNewCard">Создать новую задачу</a> */}
               Создать новую задачу
             </button>
-            <a href="#user-set-target" className="header__user _hover02">
+            <a onClick={openMenu} href="#user-set-target" className="header__user _hover02">
               Ivan Ivanov
             </a>
-            <div
+            {isOpen ? <div 
               className="header__pop-user-set pop-user-set"
               id="user-set-target"
             >
@@ -35,7 +47,7 @@ export default function Header({addCard}) {
               <button type="button" className="_hover03">
                 <a href="#popExit">Выйти</a>
               </button>
-            </div>
+            </div> : ''}
           </nav>
         </div>
       </div>

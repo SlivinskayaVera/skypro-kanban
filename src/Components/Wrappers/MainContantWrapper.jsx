@@ -1,14 +1,7 @@
 import MainColumn from "../Columns/MainColumn.jsx";
-// import { cardList } from "../../../data.js";
+import { statusList } from "../../../data.js";
 
 export default function MainContentWrapper({cards}) {
-  const statusList = [
-    "Без статуса",
-    "Нужно сделать",
-    "В работе",
-    "Тестирование",
-    "Готово",
-  ];
 
   return (
     <div className="container">
