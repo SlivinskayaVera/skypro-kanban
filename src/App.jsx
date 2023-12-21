@@ -10,11 +10,11 @@ import { cardList } from "../data";
 
 function App() {
   const [cards, setCards] = useState(cardList);
-  const [IsLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(!IsLoading);
+      setIsLoading(previous => !previous);
     }, 1000);
   }, []);
 
@@ -36,7 +36,7 @@ function App() {
       <PopNewCard />
       <PopBrowse />
       <Header addCard={addCard} />
-      {IsLoading ? (
+      {isLoading ? (
         <h1>Downloading, wait...</h1>
       ) : (
         <MainContentWrapper cards={cards} />

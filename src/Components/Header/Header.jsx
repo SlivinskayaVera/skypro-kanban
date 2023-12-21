@@ -30,7 +30,7 @@ function openMenu () {
               {/* <a href="#popNewCard">Создать новую задачу</a> */}
               Создать новую задачу
             </button>
-            <a onClick={openMenu} href="#user-set-target" className="header__user _hover02">
+            <a onClick={openMenu} className="header__user _hover02">
               Ivan Ivanov
             </a>
             {isOpen && (<div 
