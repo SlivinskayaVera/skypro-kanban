@@ -1,9 +1,10 @@
-export default function PageWrapper({  children }) {
+import { Wrapper } from "./Wrapper.styled";
+export default function PageWrapper({ children }) {
   return (
-    <div className="wrapper">
+    <Wrapper>
       {/* pop-up start */}
       {children}
       {/* pop-up end*/}
-    </div>
+    </Wrapper>
   );
 }

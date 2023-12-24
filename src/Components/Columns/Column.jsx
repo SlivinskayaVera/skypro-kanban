@@ -1,12 +1,13 @@
 import CardTask from "../Cards/CardTask.jsx";
+import { MainColumn, ColumnTitle, Cards } from "./Column.styled.js";
 
-export default function MainColumn({ title, cardList }) {
+export default function Column({ title, cardList }) {
   return (
-    <div className="main__column">
-      <div className="column__title">
+    <MainColumn>
+      <ColumnTitle>
         <p>{title}</p>
-      </div>
-      <div className="cards">
+      </ColumnTitle>
+      <Cards>
         {cardList.map((card) => (
           <CardTask
             key={card.id}
@@ -16,7 +17,7 @@ export default function MainColumn({ title, cardList }) {
             date={card.date}
           />
         ))}
-      </div>
-    </div>
+      </Cards>
+    </MainColumn>
   );
 }
