@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { breakpoints } from "../Common/breakpoints";
 
-
-
 const StyledHeader = styled.header`
   width: 100%;
   margin: 0 auto;
@@ -140,7 +138,7 @@ const HeaderBtnMainNew = styled.button`
     color: #ffffff;
   }
 
-  @media screen and (max-width: ${breakpoints.md}) {
+  @media screen and (max-width: ${props => breakpoints[props.$sizes]}) {
     z-index: 3;
     position: fixed;
     left: 16px;

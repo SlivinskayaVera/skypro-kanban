@@ -34,7 +34,7 @@ export default function Header({ addCard }) {
             </a>
           </div>
           <HeaderNav>
-            <HeaderBtnMainNew onClick={addCard} id="btnMainNew">
+            <HeaderBtnMainNew $sizes="md" onClick={addCard} id="btnMainNew">
               {/* <a href="#popNewCard">Создать новую задачу</a> */}
               Создать новую задачу
             </HeaderBtnMainNew>
