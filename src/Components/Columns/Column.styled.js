@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 const MainColumn = styled.div`
   width: 20%;
   margin: 0 auto;

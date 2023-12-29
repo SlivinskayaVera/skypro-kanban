@@ -1,4 +1,6 @@
 import styled from "styled-components";
+// import { breakpoints } from "../Common/breakpoints";
+// ${breakpoints.xl}
 
 const Main = styled.main`
   width: 100%;

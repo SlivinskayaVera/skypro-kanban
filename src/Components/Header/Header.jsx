@@ -38,9 +38,7 @@ export default function Header({ addCard }) {
               {/* <a href="#popNewCard">Создать новую задачу</a> */}
               Создать новую задачу
             </HeaderBtnMainNew>
-            <HeaderUser onClick={openMenu}>
-              Ivan Ivanov
-            </HeaderUser>
+            <HeaderUser onClick={openMenu}>Ivan Ivanov</HeaderUser>
             {isOpen && (
               <HeaderPopUserSet id="user-set-target">
                 {/* <a href="">x</a> */}
