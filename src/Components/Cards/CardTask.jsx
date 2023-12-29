@@ -1,10 +1,10 @@
-function CardTask({ name, colorTheme }) {
+function CardTask({ colorTheme, theme, title, date }) {
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
           <div className={`card__theme ${colorTheme}`}>
-            <p className={colorTheme}>{name}</p>
+            <p className={colorTheme}>{theme}</p>
           </div>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
@@ -16,7 +16,7 @@ function CardTask({ name, colorTheme }) {
         </div>
         <div className="card__content">
           <a href="" target="_blank">
-            <h3 className="card__title">Название задачи</h3>
+            <h3 className="card__title">{title}</h3>
           </a>
           <div className="card__date">
             <svg
@@ -47,7 +47,7 @@ function CardTask({ name, colorTheme }) {
                 </clipPath>
               </defs>
             </svg>
-            <p>30.10.23</p>
+            <p>{date}</p>
           </div>
         </div>
       </div>
