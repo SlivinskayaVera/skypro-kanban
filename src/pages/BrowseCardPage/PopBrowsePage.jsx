@@ -176,7 +176,8 @@ export default function PopBrowse() {
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+              <Link to={AppRoutes.HOME}>Закрыть</Link>
+                {/* <a href="#">Закрыть</a> */}
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">
@@ -195,8 +196,8 @@ export default function PopBrowse() {
                 </button>
               </div>
               <button className="btn-edit__close _btn-bg _hover01">
-                <Link to={AppRoutes.HOME} relative="path">Закрыть</Link>
-                {/* <a href="#">Закрыть</a> */}
+                {/* <Link to={AppRoutes.HOME}>Закрыть</Link> */}
+                <a href="#">Закрыть</a>
               </button>
             </div>
           </div>
