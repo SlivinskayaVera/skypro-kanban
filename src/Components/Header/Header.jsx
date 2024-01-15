@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { AppRoutes } from "../../pages/appRoutes";
 import {
   StyledHeader,
   HeaderBlock,
@@ -24,14 +26,14 @@ export default function Header({ addCard }) {
       <Container>
         <HeaderBlock>
           <div className="header__logo _show _light">
-            <a href="" target="_self">
+            <Link to={AppRoutes.HOME} target="_self">
               <img src="./public/images/logo.png" alt="logo" />
-            </a>
+            </Link>
           </div>
           <div className="header__logo _dark">
-            <a href="" target="_self">
+            <Link to={AppRoutes.HOME} target="_self">
               <img src="./public/images/logo_dark.png" alt="logo" />
-            </a>
+            </Link>
           </div>
           <HeaderNav>
             <HeaderBtnMainNew $sizes="md" onClick={addCard} id="btnMainNew">
@@ -41,7 +43,6 @@ export default function Header({ addCard }) {
             <HeaderUser onClick={openMenu}>Ivan Ivanov</HeaderUser>
             {isOpen && (
               <HeaderPopUserSet id="user-set-target">
-                {/* <a href="">x</a> */}
                 <PopUserSetName>Ivan Ivanov</PopUserSetName>
                 <PopUserSetMail>ivan.ivanov@gmail.com</PopUserSetMail>
                 <PopUserSetTheme>
@@ -49,7 +50,7 @@ export default function Header({ addCard }) {
                   <input type="checkbox" className="checkbox" name="checkbox" />
                 </PopUserSetTheme>
                 <button type="button" className="_hover03">
-                  <a href="#popExit">Выйти</a>
+                  <Link to={AppRoutes.EXIT}>Выйти</Link>
                 </button>
               </HeaderPopUserSet>
             )}

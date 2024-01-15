@@ -1,7 +1,12 @@
-import Column from "../Columns/Column.jsx";
+import { Main } from "../../Components/Wrappers/MainContentWrapper.styled.js";
+import { Outlet } from "react-router-dom";
+import Column from "../../Components/Columns/Column.jsx";
 import { statusList } from "../../../data.js";
-import { Container } from "../Common/Common.styled.js";
-import { Main, MainBlock, MainContent } from "./MainContentWrapper.styled.js";
+import { Container } from "../../Components/Common/Common.styled.js";
+import {
+  MainBlock,
+  MainContent,
+} from "../../Components/Wrappers/MainContentWrapper.styled.js";
 
 export default function MainContentWrapper({ cards }) {
   return (
@@ -19,6 +24,7 @@ export default function MainContentWrapper({ cards }) {
           </MainContent>
         </MainBlock>
       </Container>
+      <Outlet />
     </Main>
   );
 }
