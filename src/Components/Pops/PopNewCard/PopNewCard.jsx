@@ -14,6 +14,8 @@ import {
   FormNewArea,
   SubTtl,
   PopNewCardCategories,
+  CategoriesTheme,
+  SubTtlP,
 } from "./popNewCard.styled";
 
 export default function PopNewCard() {
@@ -155,17 +157,17 @@ export default function PopNewCard() {
               </div>
             </PopNewCardWrap>
             <PopNewCardCategories>
-              <p className="categories__p subttl">Категория</p>
+              <SubTtlP>Категория</SubTtlP>
               <CategoriesThemes>
-                <div className="categories__theme _orange _active-category">
+                <CategoriesTheme $themeColor="Web Design" className="_active-category">
                   <CategoryName $themeColor="Web Design">Web Design</CategoryName>
-                </div>
-                <div className="categories__theme _green">
+                </CategoriesTheme>
+                <CategoriesTheme $themeColor="Research">
                   <CategoryName $themeColor="Research">Research</CategoryName>
-                </div>
-                <div className="categories__theme _purple">
+                </CategoriesTheme>
+                <CategoriesTheme $themeColor="Copywriting">
                   <CategoryName $themeColor="Copywriting">Copywriting</CategoryName>
-                </div>
+                </CategoriesTheme>
               </CategoriesThemes>
             </PopNewCardCategories>
             <FormNewCreate id="btnCreate">Создать задачу</FormNewCreate>

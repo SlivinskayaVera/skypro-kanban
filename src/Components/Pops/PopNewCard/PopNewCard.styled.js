@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { hover01 } from "../../Common/Common.styled";
 import { breakpoints } from "../../Common/breakpoints";
+import { themeStyles } from "../../Common/themeStyles";
 
 const StyledPopNewCard = styled.div`
   display: none;
@@ -205,8 +206,35 @@ const SubTtl = styled.label`
   line-height: 1;
 `;
 
+const SubTtlP = styled.p`
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+
 const PopNewCardCategories = styled.div`
   margin-bottom: 20px;
+`;
+
+const CategoriesTheme = styled.div`
+  display: inline-block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: 0.4;
+  background-color: ${(props) =>
+    themeStyles[props.$themeColor].backgroundColor};
+  color: ${(props) => themeStyles[props.$themeColor].color};
+
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    white-space: nowrap;
+  }
 `;
 
 export {
@@ -223,5 +251,7 @@ export {
   FormNewInput,
   FormNewArea,
   SubTtl,
+  SubTtlP,
   PopNewCardCategories,
+  CategoriesTheme,
 };
