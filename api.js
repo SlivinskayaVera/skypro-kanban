@@ -31,8 +31,8 @@ export async function loginInApp({ login, password }) {
   }
 
   const data = await response.json();
-  const token = await data.user.token;
-  return token;
+  const userData = await data.user;
+  return userData;
 }
 
 export async function getTasks({ setCards }) {

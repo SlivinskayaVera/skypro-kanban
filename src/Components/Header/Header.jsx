@@ -45,11 +45,11 @@ export default function Header({ setCards }) {
               {/* <a href="#popNewCard">Создать новую задачу</a> */}
               Создать новую задачу
             </HeaderBtnMainNew>
-            <HeaderUser onClick={openMenu}>Ivan Ivanov</HeaderUser>
+            <HeaderUser onClick={openMenu}>{localStorage.userName}</HeaderUser>
             {isOpen && (
               <HeaderPopUserSet id="user-set-target">
-                <PopUserSetName>Ivan Ivanov</PopUserSetName>
-                <PopUserSetMail>ivan.ivanov@gmail.com</PopUserSetMail>
+                <PopUserSetName>{localStorage.userName}</PopUserSetName>
+                <PopUserSetMail>{localStorage.userLogin}</PopUserSetMail>
                 <PopUserSetTheme>
                   <p>Темная тема</p>
                   <input type="checkbox" className="checkbox" name="checkbox" />

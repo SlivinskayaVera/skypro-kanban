@@ -31,11 +31,14 @@ export default function SingInPage({ getIsAuth }) {
         setErrorMessage(true);
         return;
       }
-      const tokenAuthorization = await loginInApp({
+      const userData = await loginInApp({
         login: user.login,
         password: user.password,
       });
-      localStorage.token = tokenAuthorization;
+
+      localStorage.userName = userData.name;
+      localStorage.token = userData.token;
+      localStorage.userLogin = userData.login;
 
       getIsAuth();
     } catch (error) {
