@@ -1,5 +1,6 @@
 import { AppRoutes } from "../appRoutes";
 import {
+  HeaderMedium,
   PopExitContainer,
   PopExitBlock,
   PopExitTtl,
@@ -17,7 +18,7 @@ export default function PopExit({ exit }) {
       <PopExitContainer>
         <PopExitBlock>
           <PopExitTtl>
-            <h2>Выйти из аккаунта?</h2>
+            <HeaderMedium>Выйти из аккаунта?</HeaderMedium>
           </PopExitTtl>
           <PopExitForm id="formExit" action="#">
             <PopExitFormGroup>

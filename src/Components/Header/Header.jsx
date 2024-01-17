@@ -11,10 +11,12 @@ import {
   HeaderPopUserSet,
   HeaderBtnMainNew,
   HeaderUser,
+  ExitBtn,
 } from "./Header.styled";
 import { Container } from "../Common/Common.styled";
+import { addTasks } from "../../../api";
 
-export default function Header({ addCard }) {
+export default function Header({ setCards }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function openMenu() {
@@ -36,7 +38,10 @@ export default function Header({ addCard }) {
             </Link>
           </div>
           <HeaderNav>
-            <HeaderBtnMainNew $sizes="md" onClick={addCard} id="btnMainNew">
+            <HeaderBtnMainNew
+              onClick={() => addTasks({ setCards })}
+              id="btnMainNew"
+            >
               {/* <a href="#popNewCard">Создать новую задачу</a> */}
               Создать новую задачу
             </HeaderBtnMainNew>
@@ -49,9 +54,9 @@ export default function Header({ addCard }) {
                   <p>Темная тема</p>
                   <input type="checkbox" className="checkbox" name="checkbox" />
                 </PopUserSetTheme>
-                <button type="button" className="_hover03">
+                <ExitBtn type="button">
                   <Link to={AppRoutes.EXIT}>Выйти</Link>
-                </button>
+                </ExitBtn>
               </HeaderPopUserSet>
             )}
           </HeaderNav>

@@ -10,9 +10,8 @@ export default function Column({ title, cardList }) {
       <Cards>
         {cardList.map((card) => (
           <CardTask
-            key={card.id}
-            colorTheme={card.colorTheme}
-            theme={card.theme}
+            key={card._id}
+            theme={card.topic}
             title={card.title}
             date={card.date}
           />

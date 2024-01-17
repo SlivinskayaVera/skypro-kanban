@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { hover03 } from "../../Components/Common/Common.styled";
+import { breakpoints } from "../../Components/Common/breakpoints";
+
+const HeaderMedium = styled.h2``;
 
 const StyledPopExit = styled.div`
   display: flex;
@@ -35,7 +39,7 @@ const PopExitBlock = styled.div`
   border: 0.7px solid #d4dbe5;
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: ${breakpoints.sm}px) {
     padding: 50px 20px;
   }
 `;
@@ -57,7 +61,7 @@ const PopExitFormGroup = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: ${breakpoints.sm}px) {
     display: block;
   }
 `;
@@ -94,7 +98,7 @@ const PopExitExitYes = styled.button`
     background-color: #33399b;
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: ${breakpoints.sm}px) {
     width: 100%;
     height: 40px;
     margin-right: 0;
@@ -118,10 +122,7 @@ const PopExitExitNo = styled.button`
   letter-spacing: -0.14px;
   color: #ffffff;
 
-  &:hover {
-    background-color: #33399b;
-    color: #ffffff;
-  }
+  ${hover03}
 
   &:target {
     display: block;
@@ -140,13 +141,14 @@ const PopExitExitNo = styled.button`
     color: #ffffff;
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: ${breakpoints.sm}px) {
     width: 100%;
     height: 40px;
   }
 `;
 
 export {
+  HeaderMedium,
   PopExitContainer,
   PopExitBlock,
   PopExitTtl,
