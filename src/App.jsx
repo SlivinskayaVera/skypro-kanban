@@ -8,7 +8,7 @@ import Header from "./Components/Header/Header.jsx";
 import { useState, useEffect } from "react";
 import { GlobalStyle } from "./Components/Common/GlobalStyle";
 import { AppRoutes } from "./pages/appRoutes";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Error404 from "./pages/NotFoundPage/Error404.jsx";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute.jsx";
 import SingInPage from "./pages/SingInPage/SingInPage";
@@ -17,7 +17,6 @@ import LoadingPage from "./pages/LoadingPage/LoadingPage";
 import { getTasks } from "../api";
 
 function App() {
-  const navigate = useNavigate(null);
   const [cards, setCards] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(localStorage.getItem("token"));
@@ -34,7 +33,7 @@ function App() {
     getTasks({ setCards }).catch(() => {
       setErrorMessage(true);
     });
-  }, [isAuth, navigate]);
+  }, [isAuth]);
 
   return (
     <PageWrapper>
