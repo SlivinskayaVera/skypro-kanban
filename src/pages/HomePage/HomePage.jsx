@@ -6,13 +6,14 @@ import {
   MainBlock,
   MainContentWrapper,
 } from "../../Components/Wrappers/MainContent.styled.js";
+import LoadingCards from "../LoadingPagesForHomePage/LoadingCards.jsx";
 
 export default function MainContent({ cards }) {
   return (
     <Main>
       <Container>
         <MainBlock>
-          <MainContentWrapper>
+          {cards ? (<MainContentWrapper>
             {statusList.map((status) => (
               <Column
                 key={status}
@@ -20,7 +21,7 @@ export default function MainContent({ cards }) {
                 cardList={cards.filter((card) => card.status === status)}
               />
             ))}
-          </MainContentWrapper>
+          </MainContentWrapper>) : (<LoadingCards />)}
         </MainBlock>
       </Container>
     </Main>

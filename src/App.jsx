@@ -6,7 +6,6 @@ import PopBrowse from "./pages/BrowseCardPage/PopBrowsePage.jsx";
 import MainContent from "./pages/HomePage/HomePage";
 import Header from "./Components/Header/Header.jsx";
 import { useState, useEffect } from "react";
-import { cardList } from "../data";
 import { GlobalStyle } from "./Components/Common/GlobalStyle";
 import { AppRoutes } from "./pages/appRoutes";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -18,10 +17,11 @@ import LoadingPage from "./pages/LoadingPage/LoadingPage";
 import { getTasks } from "../api";
 
 function App() {
-  const navigate = useNavigate();
-  const [cards, setCards] = useState(cardList);
+  const navigate = useNavigate(null);
+  const [cards, setCards] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(localStorage.getItem("token"));
+  const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,29 +29,21 @@ function App() {
     }, 1000);
   }, []);
 
-  function getIsAuth() {
-    setIsAuth(localStorage.token);
-    navigate(AppRoutes.HOME);
-  }
-
   useEffect(() => {
-    try {
-      isAuth && getTasks({ setCards });
-    } catch (error) {
-      console.log('sdsd');
-    }
-  }, [isAuth]);
-
-  function exit() {
-    localStorage.clear();
-    setIsAuth(false);
-  }
+    if (!isAuth) return;
+    getTasks({ setCards }).catch(() => {
+      setErrorMessage(true);
+    });
+  }, [isAuth, navigate]);
 
   return (
     <PageWrapper>
       <GlobalStyle />
       <PopNewCard />
       <Header setCards={setCards} />
+      <p>
+        {errorMessage ? "Не удалось загрузить данные, попробуйте позже" : ""}
+      </p>
       {isLoading ? (
         <LoadingPage />
       ) : (
@@ -61,13 +53,16 @@ function App() {
               path={AppRoutes.HOME}
               element={<MainContent cards={cards} />}
             />
-            <Route path={AppRoutes.EXIT} element={<PopExit exit={exit} />} />
+            <Route
+              path={AppRoutes.EXIT}
+              element={<PopExit setIsAuth={setIsAuth} />}
+            />
             <Route path={AppRoutes.CARD} element={<PopBrowse />} />
           </Route>
 
           <Route
             path={AppRoutes.SIGNIN}
-            element={<SingInPage getIsAuth={getIsAuth} />}
+            element={<SingInPage setIsAuth={setIsAuth} />}
           />
           <Route path={AppRoutes.SINGUP} element={<SingUpPage />} />
           <Route path={AppRoutes.NOT_FOUND} element={<Error404 />} />

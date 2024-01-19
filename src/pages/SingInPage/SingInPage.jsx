@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppRoutes } from "../appRoutes";
 import {
   Wrapper,
@@ -15,7 +15,8 @@ import { MessageError } from "../../Components/Common/Common.styled";
 import { loginInApp } from "../../../api";
 import { useState } from "react";
 
-export default function SingInPage({ getIsAuth }) {
+export default function SingInPage({setIsAuth}) {
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const [wrongUserData, setWrongUserData] = useState(null);
   const [user, setUser] = useState({
@@ -40,7 +41,8 @@ export default function SingInPage({ getIsAuth }) {
       localStorage.token = userData.token;
       localStorage.userLogin = userData.login;
 
-      getIsAuth();
+      setIsAuth(localStorage.token);
+      navigate(AppRoutes.HOME);
     } catch (error) {
       setWrongUserData(true);
     } finally {

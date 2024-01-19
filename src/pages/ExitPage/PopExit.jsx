@@ -12,7 +12,12 @@ import {
 } from "./PopExit.styled";
 import { Link } from "react-router-dom";
 
-export default function PopExit({ exit }) {
+export default function PopExit({ setIsAuth }) {
+  function handlerExit() {
+    localStorage.clear();
+    setIsAuth(false);
+  }
+
   return (
     <StyledPopExit id="popExit">
       <PopExitContainer>
@@ -22,7 +27,7 @@ export default function PopExit({ exit }) {
           </PopExitTtl>
           <PopExitForm id="formExit" action="#">
             <PopExitFormGroup>
-              <PopExitExitYes onClick={exit} id="exitYes">
+              <PopExitExitYes onClick={handlerExit} id="exitYes">
                 <Link to={AppRoutes.SIGNIN}>Да, выйти</Link>
               </PopExitExitYes>
               <PopExitExitNo id="exitNo">
