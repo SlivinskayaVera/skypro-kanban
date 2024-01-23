@@ -27,7 +27,13 @@ export default function PopExit({ setIsAuth }) {
           </PopExitTtl>
           <PopExitForm id="formExit" action="#">
             <PopExitFormGroup>
-              <PopExitExitYes onClick={handlerExit} id="exitYes">
+              <PopExitExitYes
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlerExit();
+                }}
+                id="exitYes"
+              >
                 <Link to={AppRoutes.SIGNIN}>Да, выйти</Link>
               </PopExitExitYes>
               <PopExitExitNo id="exitNo">

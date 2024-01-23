@@ -23,16 +23,11 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
     if (!isAuth) return;
     getTasks({ setCards }).catch(() => {
       setErrorMessage(true);
     });
+    setIsLoading(false);
   }, [isAuth]);
 
   return (

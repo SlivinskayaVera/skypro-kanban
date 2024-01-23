@@ -11,10 +11,10 @@ import {
   CardsCard,
   CardBtn,
 } from "./Card.styled";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 function CardTask({ theme, title, date }) {
-  const correctDate = format(Date(date), 'dd.MM.yyyy');
+  const correctDate = format(new Date(parseISO(date)), "dd.MM.yyyy");
 
   return (
     <CardsItem>

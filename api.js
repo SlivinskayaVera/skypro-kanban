@@ -1,5 +1,8 @@
+const API_URL_TASKS = "https://wedev-api.sky.pro/api/kanban";
+const API_URL_USERS = "https://wedev-api.sky.pro/api/user";
+
 export async function registration({ name, login, password }) {
-  const response = await fetch("https://wedev-api.sky.pro/api/user", {
+  const response = await fetch(API_URL_USERS, {
     method: "POST",
     body: JSON.stringify({
       name,
@@ -18,7 +21,7 @@ export async function registration({ name, login, password }) {
 }
 
 export async function loginInApp({ login, password }) {
-  const response = await fetch("https://wedev-api.sky.pro/api/user/login", {
+  const response = await fetch(`${API_URL_USERS}/login`, {
     method: "POST",
     body: JSON.stringify({
       login,
@@ -38,7 +41,7 @@ export async function loginInApp({ login, password }) {
 export async function getTasks({ setCards }) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch("https://wedev-api.sky.pro/api/kanban", {
+  const response = await fetch(API_URL_TASKS, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -49,24 +52,24 @@ export async function getTasks({ setCards }) {
     throw new Error("Ошибка сервера");
   }
 
-  const taskList = await response.json();
-  setCards(taskList.tasks);
-  return taskList.tasks;
+  const data = await response.json();
+  setCards(data.tasks);
+  return data.tasks;
 }
 
 export async function addTasks({ setCards }) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch("https://wedev-api.sky.pro/api/kanban", {
+  const response = await fetch(API_URL_TASKS, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      title: "Новая задача 3!",
+      title: "Новая задача 4!",
       topic: "Web Design",
-      status: "Тестирование",
+      status: "Нужно сделать",
       description: "Подробное описание задачи",
-      date: "2024-01-07T16:26:18.179Z",
+      date: "2024-01-19T16:26:18.179Z",
     }),
     method: "POST",
   });

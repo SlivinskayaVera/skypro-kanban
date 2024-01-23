@@ -15,7 +15,7 @@ import { MessageError } from "../../Components/Common/Common.styled";
 import { loginInApp } from "../../../api";
 import { useState } from "react";
 
-export default function SingInPage({setIsAuth}) {
+export default function SingInPage({ setIsAuth }) {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const [wrongUserData, setWrongUserData] = useState(null);
@@ -69,7 +69,7 @@ export default function SingInPage({setIsAuth}) {
                 type="text"
                 name="login"
                 id="formlogin"
-                placeholder="Эл. почта"
+                placeholder="Логин"
                 onChange={(e) => setUser({ ...user, login: e.target.value })}
               />
               <ModalInput
@@ -91,8 +91,6 @@ export default function SingInPage({setIsAuth}) {
                 id="btnEnter"
               >
                 Войти
-                {/* onClick={getIsAuth} */}
-                {/* <Link to={AppRoutes.HOME}>Войти</Link> */}
               </ModalBtnEnter>
               <ModalFormGroup>
                 <p>Нужно зарегистрироваться?</p>
