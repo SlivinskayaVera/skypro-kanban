@@ -1,10 +1,9 @@
 // import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { AppRoutes } from '../../pages/AppRoutes';
+import { Navigate, Outlet } from 'react-router-dom';
+import { AppRoutes } from '../../pages/appRoutes';
 
-
-function PrivateRoute({ children, isAuth }) {
-  return isAuth ? children : <Navigate to={AppRoutes.SIGNIN} />;
+function PrivateRoute({ isAuth }) {
+  return isAuth ? <Outlet /> : <Navigate to={AppRoutes.SIGNIN} />;
 }
 
 

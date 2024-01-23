@@ -1,45 +1,55 @@
+import { CategoryName } from "../../Common/themeStyles";
+import {
+  StyledPopNewCard,
+  PopNewCardContainer,
+  PopNewCardBlock,
+  PopNewCardContent,
+  PopNewCardWrap,
+  PopNewCardTtl,
+  CategoriesThemes,
+  FormNewCreate,
+  FormNewBlock,
+  PopNewCardForm,
+  FormNewInput,
+  FormNewArea,
+  SubTtl,
+  PopNewCardCategories,
+  CategoriesTheme,
+  SubTtlP,
+} from "./popNewCard.styled";
+
 export default function PopNewCard() {
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
+    <StyledPopNewCard id="popNewCard">
+      <PopNewCardContainer>
+        <PopNewCardBlock>
+          <PopNewCardContent>
+            <PopNewCardTtl>Создание задачи</PopNewCardTtl>
             <a href="#" className="pop-new-card__close">
               ✖
             </a>
-            <div className="pop-new-card__wrap">
-              <form
-                className="pop-new-card__form form-new"
-                id="formNewCard"
-                action="#"
-              >
-                <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">
-                    Название задачи
-                  </label>
-                  <input
-                    className="form-new__input"
+            <PopNewCardWrap>
+              <PopNewCardForm id="formNewCard" action="#">
+                <FormNewBlock>
+                  <SubTtl htmlFor="formTitle">Название задачи</SubTtl>
+                  <FormNewInput
                     type="text"
                     name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus=""
                   />
-                </div>
-                <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-new__area"
+                </FormNewBlock>
+                <FormNewBlock>
+                  <SubTtl htmlFor="textArea">Описание задачи</SubTtl>
+                  <FormNewArea
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
                     defaultValue={""}
                   />
-                </div>
-              </form>
+                </FormNewBlock>
+              </PopNewCardForm>
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
@@ -145,27 +155,25 @@ export default function PopNewCard() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
-              </div>
-            </div>
-            <button className="form-new__create _hover01" id="btnCreate">
-              Создать задачу
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </PopNewCardWrap>
+            <PopNewCardCategories>
+              <SubTtlP>Категория</SubTtlP>
+              <CategoriesThemes>
+                <CategoriesTheme $themeColor="Web Design" className="_active-category">
+                  <CategoryName $themeColor="Web Design">Web Design</CategoryName>
+                </CategoriesTheme>
+                <CategoriesTheme $themeColor="Research">
+                  <CategoryName $themeColor="Research">Research</CategoryName>
+                </CategoriesTheme>
+                <CategoriesTheme $themeColor="Copywriting">
+                  <CategoryName $themeColor="Copywriting">Copywriting</CategoryName>
+                </CategoriesTheme>
+              </CategoriesThemes>
+            </PopNewCardCategories>
+            <FormNewCreate id="btnCreate">Создать задачу</FormNewCreate>
+          </PopNewCardContent>
+        </PopNewCardBlock>
+      </PopNewCardContainer>
+    </StyledPopNewCard>
   );
 }

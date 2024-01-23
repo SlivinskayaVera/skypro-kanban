@@ -1,19 +1,19 @@
-import { Main } from "../../Components/Wrappers/MainContentWrapper.styled.js";
-import { Outlet } from "react-router-dom";
+import { Main } from "../../Components/Wrappers/MainContent.styled.js";
 import Column from "../../Components/Columns/Column.jsx";
 import { statusList } from "../../../data.js";
 import { Container } from "../../Components/Common/Common.styled.js";
 import {
   MainBlock,
-  MainContent,
-} from "../../Components/Wrappers/MainContentWrapper.styled.js";
+  MainContentWrapper,
+} from "../../Components/Wrappers/MainContent.styled.js";
+import LoadingCards from "../LoadingPagesForHomePage/LoadingCards.jsx";
 
-export default function MainContentWrapper({ cards }) {
+export default function MainContent({ cards }) {
   return (
     <Main>
       <Container>
         <MainBlock>
-          <MainContent>
+          {cards ? (<MainContentWrapper>
             {statusList.map((status) => (
               <Column
                 key={status}
@@ -21,10 +21,9 @@ export default function MainContentWrapper({ cards }) {
                 cardList={cards.filter((card) => card.status === status)}
               />
             ))}
-          </MainContent>
+          </MainContentWrapper>) : (<LoadingCards />)}
         </MainBlock>
       </Container>
-      <Outlet />
     </Main>
   );
 }

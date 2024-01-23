@@ -1,5 +1,6 @@
 import { AppRoutes } from "../appRoutes";
 import {
+  HeaderMedium,
   PopExitContainer,
   PopExitBlock,
   PopExitTtl,
@@ -11,17 +12,28 @@ import {
 } from "./PopExit.styled";
 import { Link } from "react-router-dom";
 
-export default function PopExit({ exit }) {
+export default function PopExit({ setIsAuth }) {
+  function handlerExit() {
+    localStorage.clear();
+    setIsAuth(false);
+  }
+
   return (
     <StyledPopExit id="popExit">
       <PopExitContainer>
         <PopExitBlock>
           <PopExitTtl>
-            <h2>Выйти из аккаунта?</h2>
+            <HeaderMedium>Выйти из аккаунта?</HeaderMedium>
           </PopExitTtl>
           <PopExitForm id="formExit" action="#">
             <PopExitFormGroup>
-              <PopExitExitYes onClick={exit} id="exitYes">
+              <PopExitExitYes
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlerExit();
+                }}
+                id="exitYes"
+              >
                 <Link to={AppRoutes.SIGNIN}>Да, выйти</Link>
               </PopExitExitYes>
               <PopExitExitNo id="exitNo">

@@ -3,96 +3,63 @@ import PageWrapper from "./Components/Wrappers/PageWrapper.jsx";
 import PopExit from "./pages/ExitPage/PopExit";
 import PopNewCard from "./Components/Pops/PopNewCard/PopNewCard.jsx";
 import PopBrowse from "./pages/BrowseCardPage/PopBrowsePage.jsx";
-import MainContentWrapper from "./pages/HomePage/HomePage";
+import MainContent from "./pages/HomePage/HomePage";
 import Header from "./Components/Header/Header.jsx";
 import { useState, useEffect } from "react";
-import { cardList } from "../data";
 import { GlobalStyle } from "./Components/Common/GlobalStyle";
 import { AppRoutes } from "./pages/appRoutes";
-import { Routes, Route, useNavigate } from "react-router-dom";
-// import ContainerWithCards from "./pages/HomePage/HomePage.jsx";
-import { Error404 } from "./pages/NotFoundPage/Error404.jsx";
+import { Routes, Route } from "react-router-dom";
+import Error404 from "./pages/NotFoundPage/Error404.jsx";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute.jsx";
 import SingInPage from "./pages/SingInPage/SingInPage";
 import SingUpPage from "./pages/SingUpPage/SingUpPage";
-import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
+import LoadingPage from "./pages/LoadingPage/LoadingPage";
+import { getTasks } from "../api";
 
 function App() {
-  const navigate = useNavigate();
-  const [cards, setCards] = useState(cardList);
+  const [cards, setCards] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(localStorage.getItem("token"));
+  const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
-
-  function addCard() {
-    const newCard = {
-      id: cards.length + 1,
-      theme: "Web Design",
-      title: "Название задачи",
-      date: "30.10.23",
-      status: "Без статуса",
-      colorTheme: "_orange",
-    };
-    setCards([...cards, newCard]);
-  }
-
-  function getIsAuth() {
-    localStorage.setItem("token", "12345");
-    setIsAuth(localStorage.getItem("token"));
-    navigate(AppRoutes.HOME);
-  }
-
-  function exit() {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-  }
+    if (!isAuth) return;
+    getTasks({ setCards }).catch(() => {
+      setErrorMessage(true);
+    });
+    setIsLoading(false);
+  }, [isAuth]);
 
   return (
     <PageWrapper>
       <GlobalStyle />
       <PopNewCard />
-      <Header addCard={addCard} />
+      <Header setCards={setCards} />
+      <p>
+        {errorMessage ? "Не удалось загрузить данные, попробуйте позже" : ""}
+      </p>
       {isLoading ? (
         <LoadingPage />
       ) : (
         <Routes>
-          <Route
-            path={AppRoutes.HOME}
-            element={
-              <PrivateRoute isAuth={isAuth}>
-                <MainContentWrapper cards={cards} />
-              </PrivateRoute>
-            }
-          >
+          <Route element={<PrivateRoute isAuth={isAuth} />}>
+            <Route
+              path={AppRoutes.HOME}
+              element={<MainContent cards={cards} />}
+            />
             <Route
               path={AppRoutes.EXIT}
-              element={
-                <PrivateRoute isAuth={isAuth}>
-                  <PopExit exit={exit} />
-                </PrivateRoute>
-              }
+              element={<PopExit setIsAuth={setIsAuth} />}
             />
-            <Route
-              path={AppRoutes.CARD}
-              element={
-                <PrivateRoute isAuth={isAuth}>
-                  <PopBrowse />
-                </PrivateRoute>
-              }
-            />
+            <Route path={AppRoutes.CARD} element={<PopBrowse />} />
           </Route>
+
           <Route
             path={AppRoutes.SIGNIN}
-            element={<SingInPage getIsAuth={getIsAuth} />}
+            element={<SingInPage setIsAuth={setIsAuth} />}
           />
           <Route path={AppRoutes.SINGUP} element={<SingUpPage />} />
-
-          <Route path="*" element={<Error404 />} />
+          <Route path={AppRoutes.NOT_FOUND} element={<Error404 />} />
         </Routes>
       )}
     </PageWrapper>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoints } from "../Common/breakpoints";
 
 const CardGroup = styled.div`
   width: 100%;
@@ -10,6 +11,17 @@ const CardGroup = styled.div`
 `;
 
 const CardsItem = styled.div`
+  @keyframes card-animation {
+    0% {
+      height: 0;
+      opacity: 0;
+    }
+
+    100% {
+      height: auto;
+      opacity: 1;
+    }
+  }
   padding: 5px;
   animation-name: card-animation;
   animation-duration: 500ms;
@@ -61,7 +73,7 @@ const CardsCard = styled.div`
   justify-content: stretch;
   padding: 15px 13px 19px;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: ${breakpoints.xl}px) {
     width: 220px;
     height: 130px;
     background-color: #ffffff;

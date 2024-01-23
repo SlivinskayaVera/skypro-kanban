@@ -11,13 +11,16 @@ import {
   CardsCard,
   CardBtn,
 } from "./Card.styled";
+import { format, parseISO } from "date-fns";
 
-function CardTask({ colorTheme, theme, title, date }) {
+function CardTask({ theme, title, date }) {
+  const correctDate = format(new Date(parseISO(date)), "dd.MM.yyyy");
+
   return (
     <CardsItem>
       <CardsCard>
         <CardGroup>
-          <CardTheme $themeColor={colorTheme}>
+          <CardTheme $themeColor={theme}>
             <ThemeP>{theme}</ThemeP>
           </CardTheme>
           <Link to={AppRoutes.CARD} target="_self">
@@ -63,7 +66,7 @@ function CardTask({ colorTheme, theme, title, date }) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{date}</p>
+            <p>{correctDate}</p>
           </CardDate>
         </CardContent>
       </CardsCard>

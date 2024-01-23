@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { breakpoints } from "../Common/breakpoints";
+import { hover02, hover03 } from "../Common/Common.styled";
 
+const ExitBtn = styled.button`
+  ${hover03}
+`;
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -139,7 +143,7 @@ const HeaderBtnMainNew = styled.button`
     color: #ffffff;
   }
 
-  @media screen and (max-width: ${props => breakpoints[props.$sizes]}) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     z-index: 3;
     position: fixed;
     left: 16px;
@@ -175,14 +179,7 @@ const HeaderUser = styled.a`
     padding: 0;
   }
 
-  &:hover {
-    color: #33399b;
-  }
-
-  &:hover::after {
-    border-left-color: #33399b;
-    border-bottom-color: #33399b;
-  }
+  ${hover02}
 `;
 
 export {
@@ -195,4 +192,5 @@ export {
   HeaderPopUserSet,
   HeaderBtnMainNew,
   HeaderUser,
+  ExitBtn,
 };

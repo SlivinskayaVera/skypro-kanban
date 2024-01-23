@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoints } from "../../Components/Common/breakpoints";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,7 +26,7 @@ const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: ${breakpoints.sm}px) {
     background-color: #ffffff;
   }
 `;
@@ -52,7 +53,7 @@ const ModalBlock = styled.div`
   border: 0.7px solid #d4dbe5;
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: ${breakpoints.sm}px) {
     max-width: 368px;
     width: 100%;
     padding: 0 16px;
@@ -78,7 +79,8 @@ const ModalInput = styled.input`
   width: 100%;
   min-width: 100%;
   border-radius: 8px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border: 0.7px solid
+    ${(props) => (props.$wrongUserData ? "red" : "rgba(148, 166, 190, 0.4)")};
   outline: none;
   padding: 10px 8px;
 
@@ -132,7 +134,7 @@ const ModalBtnEnter = styled.button`
     justify-content: center;
   }
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: ${breakpoints.sm}px) {
     height: 40px;
   }
 `;

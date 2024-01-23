@@ -1,13 +1,15 @@
+import styled from "styled-components";
+
 export const themeStyles = {
-  _purple: {
+  Copywriting: {
     backgroundColor: "#e9d4ff",
     color: "#9a48f1",
   },
-  _orange: {
+  "Web Design": {
     backgroundColor: "#ffe4c2",
     color: "#ff6d00",
   },
-  _green: {
+  Research: {
     backgroundColor: "#b4fdd1",
     color: "#06b16e",
   },
@@ -16,5 +18,11 @@ export const themeStyles = {
     color: "#ffffff",
   },
 };
+
+export const CategoryName = styled.p`
+  background-color: ${(props) =>
+    themeStyles[props.$themeColor].backgroundColor};
+  color: ${(props) => themeStyles[props.$themeColor].color};
+`;
 
 

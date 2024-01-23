@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { hover01 } from "../../Components/Common/Common.styled";
+import { breakpoints } from "../../Components/Common/breakpoints";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,7 +27,7 @@ const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: ${breakpoints.sm}px) {
     background-color: #ffffff;
   }
 `;
@@ -41,7 +43,7 @@ const ModalBlock = styled.div`
   border: 0.7px solid #d4dbe5;
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: ${breakpoints.sm}px) {
     max-width: 368px;
     width: 100%;
     padding: 0 16px;
@@ -100,10 +102,11 @@ const ModalTtl = styled.div`
   }
 `;
 
-const ModalBtnSignUpEnt = styled.div`
+const ModalBtnSignUpEnt = styled.button`
   width: 100%;
   height: 30px;
-  background-color: #565eef;
+  background-color: ${(props) =>
+    props.$errorMessage || props.$wrongUserData ? "#94A6BE" : "#565eef"};
   border-radius: 4px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -118,9 +121,7 @@ const ModalBtnSignUpEnt = styled.div`
   letter-spacing: -0.14px;
   color: #ffffff;
 
-  &:hover {
-    background-color: #33399b;
-  }
+  ${hover01}
 
   a {
     width: 100%;
@@ -131,7 +132,7 @@ const ModalBtnSignUpEnt = styled.div`
     justify-content: center;
   }
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: ${breakpoints.sm}px) {
     height: 40px;
   }
 `;
