@@ -57,7 +57,7 @@ export async function getTasks({ setCards }) {
   return data.tasks;
 }
 
-export async function addTasks({ setCards }) {
+export async function addTasks({ setCards, dataTask, selectedDay }) {
   const token = localStorage.getItem("token");
 
   const response = await fetch(API_URL_TASKS, {
@@ -65,11 +65,11 @@ export async function addTasks({ setCards }) {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      title: "Новая задача 4!",
+      title: dataTask.nameTask,
       topic: "Web Design",
-      status: "Нужно сделать",
-      description: "Подробное описание задачи",
-      date: "2024-01-19T16:26:18.179Z",
+      status: "Тестирование",
+      description: dataTask.description,
+      date: selectedDay,
     }),
     method: "POST",
   });
@@ -78,7 +78,26 @@ export async function addTasks({ setCards }) {
     throw new Error("Ошибка сервера");
   }
 
-  const taskList = await response.json();
-  setCards(taskList.tasks);
-  return taskList.tasks;
+  const data = await response.json();
+  setCards(data.tasks);
+  return data.tasks;
+}
+
+export async function delTasks({ setCards, id }) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${API_URL_TASKS}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+
+  const data = await response.json();
+  setCards(data.tasks);
+  return data.tasks;
 }

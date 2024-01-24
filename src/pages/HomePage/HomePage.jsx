@@ -7,8 +7,12 @@ import {
   MainContentWrapper,
 } from "../../Components/Wrappers/MainContent.styled.js";
 import LoadingCards from "../LoadingPagesForHomePage/LoadingCards.jsx";
+import { useContext } from "react";
+import { TasksContext } from "../../contexts/tasksContext.jsx";
 
-export default function MainContent({ cards }) {
+export default function MainContent() {
+
+  const { cards } =useContext(TasksContext);
   return (
     <Main>
       <Container>

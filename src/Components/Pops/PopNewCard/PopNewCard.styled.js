@@ -4,7 +4,7 @@ import { breakpoints } from "../../Common/breakpoints";
 import { themeStyles } from "../../Common/themeStyles";
 
 const StyledPopNewCard = styled.div`
-  display: none;
+  display: block;
   width: 100%;
   min-width: 375px;
   height: 100%;

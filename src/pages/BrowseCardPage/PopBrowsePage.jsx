@@ -20,15 +20,18 @@ import {
   PopBrowseForm,
   PopBrowseWrap,
 } from "./PopBrowsePage.styled";
+import { delTasks } from "../../../api";
+import { useContext } from "react";
+import { TasksContext } from "../../contexts/tasksContext";
+import { DayPicker } from "react-day-picker";
 
+export default function PopBrowse({ id }) {
+  const { setCards } = useContext(TasksContext);
 
-
-
-
-export default function PopBrowse() {
-
-
-
+  const handlerDeleteTask = async (event) => {
+    event.preventDefault();
+    await delTasks({ setCards, id });
+  };
   return (
     <StyledPopBrowse id="popBrowse">
       <PopBrowseContainer>
@@ -61,10 +64,7 @@ export default function PopBrowse() {
               </div>
             </div>
             <PopBrowseWrap>
-              <PopBrowseForm
-                id="formBrowseCard"
-                action="#"
-              >
+              <PopBrowseForm id="formBrowseCard" action="#">
                 <FormBrowseBlock>
                   <SubTtl htmlFor="textArea01">Описание задачи</SubTtl>
                   <FormBrowseArea
@@ -76,7 +76,14 @@ export default function PopBrowse() {
                   />
                 </FormBrowseBlock>
               </PopBrowseForm>
-              <div className="pop-new-card__calendar calendar">
+              <DayPicker
+                  showOutsideDays
+                  mode="single"
+                  // onSelect={setSelectedDay}
+                  required
+                  // selected={selectedDay}
+                />
+              {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
                   <div className="calendar__nav">
@@ -180,7 +187,7 @@ export default function PopBrowse() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </PopBrowseWrap>
             <ThemeDownCategories>
               <CategoriesP>Категория</CategoriesP>
@@ -193,13 +200,12 @@ export default function PopBrowse() {
                 <ButtonActionForTest>
                   <a href="#">Редактировать задачу</a>
                 </ButtonActionForTest>
-                <ButtonActionForTest>
+                <ButtonActionForTest onClick={handlerDeleteTask}>
                   <a href="#">Удалить задачу</a>
                 </ButtonActionForTest>
               </ButtonGroup>
               <ButtonMenu>
                 <Link to={AppRoutes.HOME}>Закрыть</Link>
-                {/* <a href="#">Закрыть</a> */}
               </ButtonMenu>
             </PopBrowseBtnBrowse>
             <PopBrowseBtnEdit>

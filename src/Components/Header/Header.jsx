@@ -14,10 +14,10 @@ import {
   ExitBtn,
 } from "./Header.styled";
 import { Container } from "../Common/Common.styled";
-import { addTasks } from "../../../api";
 
-export default function Header({ setCards }) {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
 
   function openMenu() {
     setIsOpen((previous) => !previous);
@@ -38,12 +38,10 @@ export default function Header({ setCards }) {
             </Link>
           </div>
           <HeaderNav>
-            <HeaderBtnMainNew
-              onClick={() => addTasks({ setCards })}
-              id="btnMainNew"
-            >
-              {/* <a href="#popNewCard">Создать новую задачу</a> */}
-              Создать новую задачу
+            <HeaderBtnMainNew id="btnMainNew">
+              <Link to={AppRoutes.NEW_CARD}>
+                Создать новую задачу
+              </Link>
             </HeaderBtnMainNew>
             <HeaderUser onClick={openMenu}>{localStorage.userName}</HeaderUser>
             {isOpen && (

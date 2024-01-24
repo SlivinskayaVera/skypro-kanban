@@ -13,7 +13,7 @@ import {
 } from "./Card.styled";
 import { format, parseISO } from "date-fns";
 
-function CardTask({ theme, title, date }) {
+function CardTask({ theme, title, date, id }) {
   const correctDate = format(new Date(parseISO(date)), "dd.MM.yyyy");
 
   return (
@@ -23,7 +23,7 @@ function CardTask({ theme, title, date }) {
           <CardTheme $themeColor={theme}>
             <ThemeP>{theme}</ThemeP>
           </CardTheme>
-          <Link to={AppRoutes.CARD} target="_self">
+          <Link to={AppRoutes.CARD}>
             {/* <a href="#popBrowse" target="_self"> */}
             <CardBtn>
               <div />
@@ -33,9 +33,9 @@ function CardTask({ theme, title, date }) {
           </Link>
         </CardGroup>
         <CardContent>
-          <Link to={AppRoutes.CARD} target="_self">
+          <Link to={AppRoutes.CARD}>
             {/* <a href="" target="_blank"> */}
-            <CardTitle>{title}</CardTitle>
+            <CardTitle id={id}>{title}</CardTitle>
           </Link>
           <CardDate>
             <svg

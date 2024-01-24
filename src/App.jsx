@@ -15,12 +15,15 @@ import SingInPage from "./pages/SingInPage/SingInPage";
 import SingUpPage from "./pages/SingUpPage/SingUpPage";
 import LoadingPage from "./pages/LoadingPage/LoadingPage";
 import { getTasks } from "../api";
+import { useContext } from "react";
+import { UserContext } from "./contexts/userContext";
+import { TasksContext } from "./contexts/tasksContext";
 
 function App() {
-  const [cards, setCards] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(localStorage.getItem("token"));
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+  const { isAuth } = useContext(UserContext);
+  const { setCards } = useContext(TasksContext);
 
   useEffect(() => {
     if (!isAuth) return;
@@ -28,13 +31,12 @@ function App() {
       setErrorMessage(true);
     });
     setIsLoading(false);
-  }, [isAuth]);
+  }, [isAuth, setCards]);
 
   return (
     <PageWrapper>
       <GlobalStyle />
-      <PopNewCard />
-      <Header setCards={setCards} />
+      {isAuth && <Header />}
       <p>
         {errorMessage ? "Не удалось загрузить данные, попробуйте позже" : ""}
       </p>
@@ -42,21 +44,22 @@ function App() {
         <LoadingPage />
       ) : (
         <Routes>
-          <Route element={<PrivateRoute isAuth={isAuth} />}>
+          <Route element={<PrivateRoute />}>
             <Route
               path={AppRoutes.HOME}
-              element={<MainContent cards={cards} />}
+              element={<MainContent />}
             />
+            <Route path={AppRoutes.NEW_CARD} element={<PopNewCard />} />
             <Route
               path={AppRoutes.EXIT}
-              element={<PopExit setIsAuth={setIsAuth} />}
+              element={<PopExit />}
             />
             <Route path={AppRoutes.CARD} element={<PopBrowse />} />
           </Route>
 
           <Route
             path={AppRoutes.SIGNIN}
-            element={<SingInPage setIsAuth={setIsAuth} />}
+            element={<SingInPage />}
           />
           <Route path={AppRoutes.SINGUP} element={<SingUpPage />} />
           <Route path={AppRoutes.NOT_FOUND} element={<Error404 />} />
