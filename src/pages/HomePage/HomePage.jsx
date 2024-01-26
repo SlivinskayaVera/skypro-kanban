@@ -9,25 +9,33 @@ import {
 import LoadingCards from "../LoadingPagesForHomePage/LoadingCards.jsx";
 import { useContext } from "react";
 import { TasksContext } from "../../contexts/tasksContext.jsx";
+import { Outlet } from "react-router-dom";
 
 export default function MainContent() {
+  const { cards } = useContext(TasksContext);
 
-  const { cards } =useContext(TasksContext);
+
   return (
-    <Main>
-      <Container>
-        <MainBlock>
-          {cards ? (<MainContentWrapper>
-            {statusList.map((status) => (
-              <Column
-                key={status}
-                title={status}
-                cardList={cards.filter((card) => card.status === status)}
-              />
-            ))}
-          </MainContentWrapper>) : (<LoadingCards />)}
-        </MainBlock>
-      </Container>
-    </Main>
+
+        <Main>
+          <Container>
+            <MainBlock>
+              <Outlet />
+              {cards ? (
+                <MainContentWrapper>
+                  {statusList.map((status) => (
+                    <Column
+                      key={status}
+                      title={status}
+                      cardList={cards.filter((card) => card.status === status)}
+                    />
+                  ))}
+                </MainContentWrapper>
+              ) : (
+                <LoadingCards />
+              )}
+            </MainBlock>
+          </Container>
+        </Main>
   );
 }

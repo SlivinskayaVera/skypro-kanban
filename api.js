@@ -57,8 +57,7 @@ export async function getTasks({ setCards }) {
   return data.tasks;
 }
 
-export async function addTasks({ setCards, dataTask, selectedDay }) {
-  const token = localStorage.getItem("token");
+export async function addTasks({ setCards, token, dataTask, selectedDay }) {
 
   const response = await fetch(API_URL_TASKS, {
     headers: {
@@ -83,9 +82,7 @@ export async function addTasks({ setCards, dataTask, selectedDay }) {
   return data.tasks;
 }
 
-export async function delTasks({ setCards, id }) {
-  const token = localStorage.getItem("token");
-
+export async function delTasks({ setCards, id, token }) {
   const response = await fetch(`${API_URL_TASKS}/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -96,7 +93,6 @@ export async function delTasks({ setCards, id }) {
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
-
   const data = await response.json();
   setCards(data.tasks);
   return data.tasks;

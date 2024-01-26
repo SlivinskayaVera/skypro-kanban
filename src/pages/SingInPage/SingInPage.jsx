@@ -14,11 +14,10 @@ import {
 import { MessageError } from "../../Components/Common/Common.styled";
 import { loginInApp } from "../../../api";
 import { useState } from "react";
-import { UserContext } from "../../contexts/userContext";
-import { useContext } from "react";
+import { UserHook } from "../../hooks/useUserHook";
 
 export default function SingInPage() {
-  const { setIsAuth } = useContext(UserContext);
+  const { setIsAuth } = UserHook();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const [wrongUserData, setWrongUserData] = useState(null);
@@ -27,7 +26,7 @@ export default function SingInPage() {
     password: "",
   });
 
-  const { setUser } = useContext(UserContext);
+  const { setUser } = UserHook();
 
   const handlerLoginInApp = async (event) => {
     event.preventDefault();

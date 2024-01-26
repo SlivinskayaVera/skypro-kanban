@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppRoutes } from "../appRoutes";
 import { CategoryName } from "../../Components/Common/themeStyles";
 import {
@@ -21,16 +21,21 @@ import {
   PopBrowseWrap,
 } from "./PopBrowsePage.styled";
 import { delTasks } from "../../../api";
-import { useContext } from "react";
-import { TasksContext } from "../../contexts/tasksContext";
 import { DayPicker } from "react-day-picker";
+import { TaskHook } from "../../hooks/useTaskHook";
+import { UserHook } from "../../hooks/useUserHook";
 
-export default function PopBrowse({ id }) {
-  const { setCards } = useContext(TasksContext);
+export default function PopBrowse() {
+  let { id } = useParams();
+  const { setCards } = TaskHook();
+  const navigate = useNavigate(null);
+  const { user } = UserHook();
 
   const handlerDeleteTask = async (event) => {
     event.preventDefault();
-    await delTasks({ setCards, id });
+    const token = user.token;
+    await delTasks({ setCards, id, token });
+    navigate(AppRoutes.HOME);
   };
   return (
     <StyledPopBrowse id="popBrowse">
@@ -77,12 +82,12 @@ export default function PopBrowse({ id }) {
                 </FormBrowseBlock>
               </PopBrowseForm>
               <DayPicker
-                  showOutsideDays
-                  mode="single"
-                  // onSelect={setSelectedDay}
-                  required
-                  // selected={selectedDay}
-                />
+                showOutsideDays
+                mode="single"
+                // onSelect={setSelectedDay}
+                required
+                // selected={selectedDay}
+              />
               {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">

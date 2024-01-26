@@ -24,7 +24,6 @@ function CardTask({ theme, title, date, id }) {
             <ThemeP>{theme}</ThemeP>
           </CardTheme>
           <Link to={AppRoutes.CARD}>
-            {/* <a href="#popBrowse" target="_self"> */}
             <CardBtn>
               <div />
               <div />
@@ -33,9 +32,8 @@ function CardTask({ theme, title, date, id }) {
           </Link>
         </CardGroup>
         <CardContent>
-          <Link to={AppRoutes.CARD}>
-            {/* <a href="" target="_blank"> */}
-            <CardTitle id={id}>{title}</CardTitle>
+          <Link to={`/card/${id}`}>
+            <CardTitle>{title}</CardTitle>
           </Link>
           <CardDate>
             <svg

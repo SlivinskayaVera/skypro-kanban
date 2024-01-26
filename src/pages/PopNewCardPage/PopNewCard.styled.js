@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { hover01 } from "../../Common/Common.styled";
-import { breakpoints } from "../../Common/breakpoints";
-import { themeStyles } from "../../Common/themeStyles";
+import { hover01 } from "../../Components/Common/Common.styled";
+import { breakpoints } from "../../Components/Common/breakpoints";
+import { themeStyles } from "../../Components/Common/themeStyles";
 
 const StyledPopNewCard = styled.div`
   display: block;

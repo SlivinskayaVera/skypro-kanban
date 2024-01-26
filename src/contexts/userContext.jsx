@@ -6,7 +6,7 @@ const UserContext = createContext(null);
 
 // для получения этих данных
 function UserProvider({ children }) {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
   const [isAuth, setIsAuth] = useState(localStorage.getItem("token"));
 
   return (

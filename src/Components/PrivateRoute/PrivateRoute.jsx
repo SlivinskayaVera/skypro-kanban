@@ -1,12 +1,12 @@
 // import React from 'react';
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { AppRoutes } from "../../pages/appRoutes";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/userContext";
+import { UserHook } from "../../hooks/useUserHook";
+import { Layout } from "../Layout/Layout";
 
 function PrivateRoute() {
-  const { user } = useContext(UserContext);
-  return user ? <Outlet /> : <Navigate to={AppRoutes.SIGNIN} />;
+  const { user } = UserHook();
+  return user ? <Layout /> : <Navigate to={AppRoutes.SIGNIN} />;
 }
 
 export default PrivateRoute;

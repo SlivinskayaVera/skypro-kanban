@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { AppRoutes } from "../appRoutes";
 import {
   HeaderMedium,
@@ -12,10 +11,10 @@ import {
   PopExitExitNo,
 } from "./PopExit.styled";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../contexts/userContext";
+import { UserHook } from "../../hooks/useUserHook";
 
 export default function PopExit() {
-  const { setIsAuth } = useContext(UserContext);
+  const { setIsAuth } = UserHook();
 
   function handlerExit() {
     localStorage.removeItem("userName");

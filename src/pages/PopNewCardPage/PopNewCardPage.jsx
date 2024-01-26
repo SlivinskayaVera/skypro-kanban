@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { AppRoutes } from "../../../pages/appRoutes";
-import { CategoryName } from "../../Common/themeStyles";
+import { AppRoutes } from "../appRoutes";
+import { CategoryName } from "../../Components/Common/themeStyles";
 import {
   StyledPopNewCard,
   PopNewCardContainer,
@@ -18,17 +18,18 @@ import {
   PopNewCardCategories,
   CategoriesTheme,
   SubTtlP,
-} from "./popNewCard.styled";
-import { addTasks } from "../../../../api";
+} from "./PopNewCard.styled";
+import { addTasks } from "../../../api";
 import { useState } from "react";
-import { useContext } from "react";
-import { TasksContext } from "../../../contexts/tasksContext";
-import LoadingCards from "../../../pages/LoadingPagesForHomePage/LoadingCards";
+import LoadingCards from "../LoadingPagesForHomePage/LoadingCards";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { TaskHook } from "../../hooks/useTaskHook";
+import { UserHook } from "../../hooks/useUserHook";
 
 export default function PopNewCard() {
-  const { setCards } = useContext(TasksContext);
+  const { setCards } = TaskHook();
+  const { user } = UserHook();
 
   const [dataTask, setDataTask] = useState({
     nameTask: "",
@@ -44,8 +45,10 @@ export default function PopNewCard() {
     event.preventDefault();
     if (!dataTask.nameTask || !dataTask.description) return;
 
+    const token = user.token;
+
     await setIsLoading(true);
-    await addTasks({ setCards, dataTask, selectedDay });
+    await addTasks({ setCards, token, dataTask, selectedDay });
     await setIsLoading(false);
     navigate(AppRoutes.HOME);
   };
