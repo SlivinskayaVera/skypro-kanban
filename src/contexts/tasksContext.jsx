@@ -6,7 +6,7 @@ const TasksContext = createContext(null);
 
 // для получения этих данных
 function TasksProvider({children}) {
-  const [cards, setCards] = useState(" ");
+  const [cards, setCards] = useState({});
 
   if (!cards) {
     throw new Error("Данные по задачам не были найдены");

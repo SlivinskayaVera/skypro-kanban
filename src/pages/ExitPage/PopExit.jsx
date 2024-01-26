@@ -21,7 +21,7 @@ export default function PopExit() {
     localStorage.removeItem("token");
     localStorage.removeItem("userLogin");
     localStorage.removeItem("user");
-    setIsAuth(false);
+    setIsAuth(null);
   }
 
   return (

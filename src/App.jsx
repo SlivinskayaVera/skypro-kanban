@@ -18,9 +18,9 @@ import { UserHook } from "./hooks/useUserHook";
 import { TaskHook } from "./hooks/useTaskHook";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-  const { isAuth, } = UserHook();
+  const { isAuth } = UserHook();
   const { setCards } = TaskHook();
 
   useEffect(() => {
@@ -35,7 +35,9 @@ function App() {
     <PageWrapper>
       <GlobalStyle />
       <p>
-        {errorMessage ? "Не удалось загрузить данные, попробуйте позже" : ""}
+        {errorMessage
+          ? "Не удалось загрузить данные по задачам, попробуйте позже"
+          : ""}
       </p>
       {isLoading ? (
         <LoadingPage />

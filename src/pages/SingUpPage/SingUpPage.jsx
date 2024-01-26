@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { registration } from "../../../api";
 import { MessageError } from "../../Components/Common/Common.styled";
+import { UserHook } from "../../hooks/useUserHook";
 
 export default function SingUpPage() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -24,6 +25,7 @@ export default function SingUpPage() {
     login: "",
     password: "",
   });
+  const { setUser, user } = UserHook();
 
   const handlerRegistration = async (event) => {
     event.preventDefault();
@@ -38,8 +40,10 @@ export default function SingUpPage() {
         login: newUser.login,
         password: newUser.password,
       });
-      localStorage.token = tokenRegistration;
-      navigate(AppRoutes.SIGNIN);
+      localStorage.user = JSON.stringify(tokenRegistration);
+      setUser(JSON.parse(localStorage.user));
+      console.log(user);
+      navigate(AppRoutes.HOME);
     } catch (error) {
       setWrongUserData(true);
     } finally {
