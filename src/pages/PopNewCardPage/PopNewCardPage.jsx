@@ -33,7 +33,8 @@ export default function PopNewCard() {
 
   const [selectedDay, setSelectedDay] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
-  const [topic, setTopic] = useState('');
+  const [topic, setTopic] = useState("");
+  const [isActive, setIsActive] = useState(true);
   const [dataTask, setDataTask] = useState({
     nameTask: "",
     description: "",
@@ -41,12 +42,12 @@ export default function PopNewCard() {
 
   const navigate = useNavigate(null);
 
-
   const handlerAddNewTask = async (event) => {
     event.preventDefault();
     if (!dataTask.nameTask || !dataTask.description) return;
 
     const token = user.token;
+    setIsActive(false);
 
     await setIsLoading(true);
     await addTasks({ setCards, token, dataTask, selectedDay, topic });
@@ -116,16 +117,25 @@ export default function PopNewCard() {
                 <CategoriesTheme
                   onClick={() => setTopic("Web Design")}
                   $themeColor="Web Design"
-                  className="_active-category"
+                  // className="_active-category"
+                  $active={isActive}
                 >
                   <CategoryName $themeColor="Web Design">
                     Web Design
                   </CategoryName>
+
                 </CategoriesTheme>
-                <CategoriesTheme $themeColor="Research" onClick={() => setTopic("Research")}>
+                <CategoriesTheme
+                  $themeColor="Research"
+                  onClick={() => setTopic("Research")}
+                  
+                >
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>
-                <CategoriesTheme $themeColor="Copywriting" onClick={() => setTopic("Copywriting")}>
+                <CategoriesTheme
+                  $themeColor="Copywriting"
+                  onClick={() => setTopic("Copywriting")}
+                >
                   <CategoryName $themeColor="Copywriting">
                     Copywriting
                   </CategoryName>

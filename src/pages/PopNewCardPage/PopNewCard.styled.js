@@ -93,6 +93,7 @@ const CategoriesThemes = styled.div`
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
+  margin-top: 14px;
 `;
 
 const PopNewCardForm = styled.form`
@@ -218,17 +219,19 @@ const PopNewCardCategories = styled.div`
 `;
 
 const CategoriesTheme = styled.button`
-  /* display: inline-block; */
+  display: inline-block;
   width: auto;
   height: 30px;
   padding: 8px 20px;
   border-style: none;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: 0.4;
+  opacity: ${(props) => props.$active ? 1 : 0.4};
   background-color: ${(props) =>
     themeStyles[props.$themeColor].backgroundColor};
   color: ${(props) => themeStyles[props.$themeColor].color};
+
+
 
   p {
     font-size: 14px;
