@@ -57,7 +57,7 @@ export async function getTasks({ setCards }) {
   return data.tasks;
 }
 
-export async function addTasks({ setCards, token, dataTask, selectedDay }) {
+export async function addTasks({ setCards, token, dataTask, selectedDay, topic }) {
 
   const response = await fetch(API_URL_TASKS, {
     headers: {
@@ -65,8 +65,8 @@ export async function addTasks({ setCards, token, dataTask, selectedDay }) {
     },
     body: JSON.stringify({
       title: dataTask.nameTask,
-      topic: "Web Design",
-      status: "Тестирование",
+      topic: topic,
+      status: "Без статуса",
       description: dataTask.description,
       date: selectedDay,
     }),

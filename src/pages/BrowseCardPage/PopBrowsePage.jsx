@@ -27,7 +27,7 @@ import { UserHook } from "../../hooks/useUserHook";
 
 export default function PopBrowse() {
   let { id } = useParams();
-  const { setCards } = TaskHook();
+  const { setCards, cards } = TaskHook();
   const navigate = useNavigate(null);
   const { user } = UserHook();
 
@@ -37,6 +37,9 @@ export default function PopBrowse() {
     await delTasks({ setCards, id, token });
     navigate(AppRoutes.HOME);
   };
+
+  const statusTask = cards.filter((card) => card._id === id)[0].status;
+
   return (
     <StyledPopBrowse id="popBrowse">
       <PopBrowseContainer>
@@ -55,9 +58,9 @@ export default function PopBrowse() {
                   <p>Без статуса</p>
                 </div>
                 <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
+                  <p className="_gray">{statusTask}</p>
                 </div>
-                <div className="status__theme _hide">
+                {/* <div className="status__theme _hide">
                   <p>В работе</p>
                 </div>
                 <div className="status__theme _hide">
@@ -65,7 +68,7 @@ export default function PopBrowse() {
                 </div>
                 <div className="status__theme _hide">
                   <p>Готово</p>
-                </div>
+                </div> */}
               </div>
             </div>
             <PopBrowseWrap>
@@ -88,6 +91,7 @@ export default function PopBrowse() {
                 required
                 // selected={selectedDay}
               />
+
               {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">

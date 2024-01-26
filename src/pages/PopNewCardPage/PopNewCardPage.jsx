@@ -31,15 +31,16 @@ export default function PopNewCard() {
   const { setCards } = TaskHook();
   const { user } = UserHook();
 
+  const [selectedDay, setSelectedDay] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(false);
+  const [topic, setTopic] = useState('');
   const [dataTask, setDataTask] = useState({
     nameTask: "",
     description: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate(null);
-  const [selectedDay, setSelectedDay] = useState(new Date());
+
 
   const handlerAddNewTask = async (event) => {
     event.preventDefault();
@@ -48,7 +49,7 @@ export default function PopNewCard() {
     const token = user.token;
 
     await setIsLoading(true);
-    await addTasks({ setCards, token, dataTask, selectedDay });
+    await addTasks({ setCards, token, dataTask, selectedDay, topic });
     await setIsLoading(false);
     navigate(AppRoutes.HOME);
   };
@@ -113,6 +114,7 @@ export default function PopNewCard() {
               <SubTtlP>Категория</SubTtlP>
               <CategoriesThemes>
                 <CategoriesTheme
+                  onClick={() => setTopic("Web Design")}
                   $themeColor="Web Design"
                   className="_active-category"
                 >
@@ -120,10 +122,10 @@ export default function PopNewCard() {
                     Web Design
                   </CategoryName>
                 </CategoriesTheme>
-                <CategoriesTheme $themeColor="Research">
+                <CategoriesTheme $themeColor="Research" onClick={() => setTopic("Research")}>
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>
-                <CategoriesTheme $themeColor="Copywriting">
+                <CategoriesTheme $themeColor="Copywriting" onClick={() => setTopic("Copywriting")}>
                   <CategoryName $themeColor="Copywriting">
                     Copywriting
                   </CategoryName>
