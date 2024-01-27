@@ -13,6 +13,7 @@ import { getTasks } from "../../../api.js";
 import { UserHook } from "../../hooks/useUserHook.js";
 import { TaskHook } from "../../hooks/useTaskHook.js";
 import LoadingCards from "../LoadingPagesForHomePage/LoadingCards.jsx";
+import LoadingCardsError from "../LoadingPagesForHomePage/LoadingCardsError.jsx";
 
 export default function MainContent() {
   const { cards } = useContext(TasksContext);
@@ -29,27 +30,24 @@ export default function MainContent() {
 
   return (
     <Main>
-      <p>
         {errorMessage
-          ? "Не удалось загрузить данные по задачам, попробуйте позже"
-          : ""}
-      </p>
-      <Container>
-        <MainBlock>
-          <Outlet />
-          {!cards ? (<LoadingCards />) : (
-            <MainContentWrapper>
-              {statusList.map((status) => (
-                <Column
-                  key={status}
-                  title={status}
-                  cardList={cards.filter((card) => card.status === status)}
-                />
-              ))}
-            </MainContentWrapper>
-          )}
-        </MainBlock>
-      </Container>
+          ? (<LoadingCardsError />)
+          : (<Container>
+            <MainBlock>
+              <Outlet />
+              {!cards ? (<LoadingCards />) : (
+                <MainContentWrapper>
+                  {statusList.map((status) => (
+                    <Column
+                      key={status}
+                      title={status}
+                      cardList={cards.filter((card) => card.status === status)}
+                    />
+                  ))}
+                </MainContentWrapper>
+              )}
+            </MainBlock>
+          </Container>)}
     </Main>
   );
 

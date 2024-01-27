@@ -94,6 +94,10 @@ const CategoriesThemes = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   margin-top: 14px;
+
+  button:focus {
+    opacity: 1;
+  }
 `;
 
 const PopNewCardForm = styled.form`
@@ -106,6 +110,15 @@ const PopNewCardForm = styled.form`
     max-width: 100%;
     width: 100%;
     display: block;
+  }
+`;
+
+const WrapperCalendar = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  p {
+    padding-left: 27px;
   }
 `;
 
@@ -230,7 +243,7 @@ const CategoriesTheme = styled.button`
   border-style: none;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: ${(props) => (props.$active ? 1 : 0.4)};
+  opacity: 0.4;
   background-color: ${(props) =>
     themeStyles[props.$themeColor].backgroundColor};
   color: ${(props) => themeStyles[props.$themeColor].color};
@@ -260,4 +273,5 @@ export {
   SubTtlP,
   PopNewCardCategories,
   CategoriesTheme,
+  WrapperCalendar,
 };

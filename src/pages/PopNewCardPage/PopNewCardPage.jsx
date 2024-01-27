@@ -18,6 +18,7 @@ import {
   PopNewCardCategories,
   CategoriesTheme,
   SubTtlP,
+  WrapperCalendar,
 } from "./PopNewCard.styled";
 import { addTasks } from "../../../api";
 import { useState } from "react";
@@ -26,6 +27,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { TaskHook } from "../../hooks/useTaskHook";
 import { UserHook } from "../../hooks/useUserHook";
+import { format } from "date-fns";
 
 export default function PopNewCard() {
   const { setCards } = TaskHook();
@@ -34,7 +36,6 @@ export default function PopNewCard() {
   const [selectedDay, setSelectedDay] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
   const [topic, setTopic] = useState(false);
-  const [isActive, setIsActive] = useState(true);
   const [dataTask, setDataTask] = useState({
     nameTask: "",
     description: "",
@@ -46,11 +47,10 @@ export default function PopNewCard() {
     event.preventDefault();
     if (!dataTask.nameTask || !dataTask.description || !topic) return;
 
+    setIsLoading(true);
     const userData = JSON.parse(user);
     const token = userData.token;
-    setIsActive(false);
 
-    await setIsLoading(true);
     await addTasks({ setCards, token, dataTask, selectedDay, topic });
     await setIsLoading(false);
     navigate(AppRoutes.HOME);
@@ -96,7 +96,7 @@ export default function PopNewCard() {
                   />
                 </FormNewBlock>
               </PopNewCardForm>
-              <>
+              <WrapperCalendar>
                 <DayPicker
                   showOutsideDays
                   mode="single"
@@ -104,13 +104,8 @@ export default function PopNewCard() {
                   required
                   selected={selectedDay}
                 />
-                {/* <div className="calendar__period">
-                  <p className="calendar__p date-end">
-                    <p>You selected {format(selectedDay, "PPP")}.</p>
-                    Выберите срок исполнения <span className="date-control" />.
-                  </p>
-                </div> */}
-              </>
+                <p>You selected {format(selectedDay, "PPP")}.</p>
+              </WrapperCalendar>
             </PopNewCardWrap>
             <PopNewCardCategories>
               <SubTtlP>Категория</SubTtlP>
@@ -118,7 +113,6 @@ export default function PopNewCard() {
                 <CategoriesTheme
                   onClick={() => setTopic("Web Design")}
                   $themeColor="Web Design"
-                  $active={isActive}
                 >
                   <CategoryName $themeColor="Web Design">
                     Web Design
@@ -127,6 +121,7 @@ export default function PopNewCard() {
                 <CategoriesTheme
                   $themeColor="Research"
                   onClick={() => setTopic("Research")}
+                  checked
                 >
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>

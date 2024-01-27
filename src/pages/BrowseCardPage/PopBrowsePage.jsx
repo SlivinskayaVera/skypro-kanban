@@ -23,7 +23,6 @@ import { delTasks } from "../../../api";
 import { DayPicker } from "react-day-picker";
 import { TaskHook } from "../../hooks/useTaskHook";
 import { UserHook } from "../../hooks/useUserHook";
-// import 'react-day-picker/dist/style.css';
 
 export default function PopBrowse() {
   let { id } = useParams();
@@ -33,16 +32,12 @@ export default function PopBrowse() {
 
   const handlerDeleteTask = async (event) => {
     event.preventDefault();
-    const token = user.token;
+    const userData = JSON.parse(user);
+    const token = userData.token;
     await delTasks({ setCards, id, token });
     navigate(AppRoutes.HOME);
-
-    
   };
   const dataTask = cards.find((card) => card._id === id);
-  const descriptionTask = cards.filter((card) => card._id === id)[0].description;
-
-
 
   return (
     <StyledPopBrowse id="popBrowse">
@@ -72,7 +67,7 @@ export default function PopBrowse() {
                     id="textArea01"
                     readOnly=""
                     placeholder="Введите описание задачи..."
-                    defaultValue={descriptionTask}
+                    defaultValue={dataTask.description}
                   />
                 </FormBrowseBlock>
               </PopBrowseForm>
@@ -201,29 +196,13 @@ export default function PopBrowse() {
                   <Link to={`/edit-card/${id}`}>Редактировать задачу</Link>
                 </ButtonActionForTest>
                 <ButtonActionForTest onClick={handlerDeleteTask}>
-                  <a href="#">Удалить задачу</a>
+                  Удалить задачу
                 </ButtonActionForTest>
               </ButtonGroup>
               <ButtonMenu>
                 <Link to={AppRoutes.HOME}>Закрыть</Link>
               </ButtonMenu>
             </PopBrowseBtnBrowse>
-            {/* <PopBrowseBtnEdit>
-              <ButtonGroup>
-                <ButtonMenu>
-                  <a href="#">Сохранить</a>
-                </ButtonMenu>
-                <ButtonActionForTest>
-                  <a href="#">Отменить</a>
-                </ButtonActionForTest>
-                <ButtonActionForTest id="btnDelete">
-                  <a href="#">Удалить задачу</a>
-                </ButtonActionForTest>
-              </ButtonGroup>
-              <ButtonMenu>
-                <Link to={AppRoutes.HOME}>Закрыть</Link>
-              </ButtonMenu>
-            </PopBrowseBtnEdit> */}
           </div>
         </PopBrowseBlock>
       </PopBrowseContainer>
