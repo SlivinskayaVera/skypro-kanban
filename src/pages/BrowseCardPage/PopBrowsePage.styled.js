@@ -59,6 +59,19 @@ const PopBrowseBlock = styled.div`
   }
 `;
 
+const PopBrowseContent = styled.div`
+  display: block;
+  text-align: left;
+
+  /* .categories__theme {
+  opacity: 1;
+} */
+
+  /* .theme-top {
+  display: block;
+} */
+`;
+
 const PopBrowseTopBlock = styled.div`
   display: flex;
   align-items: center;
@@ -83,6 +96,16 @@ const SubTtl = styled.label`
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
+`;
+
+const SubTtlP = styled.p`
+  color: black;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-bottom: 14px;
 `;
 
 const FormBrowseArea = styled.textarea`
@@ -252,6 +275,7 @@ export {
   PopBrowseTtl,
   FormBrowseBlock,
   SubTtl,
+  SubTtlP,
   FormBrowseArea,
   ButtonBor,
   ButtonBg,
@@ -264,4 +288,5 @@ export {
   ThemeDownCategories,
   PopBrowseForm,
   PopBrowseWrap,
+  PopBrowseContent,
 };

@@ -1,6 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppRoutes } from "../appRoutes";
-import { CategoryName } from "../../Components/Common/themeStyles";
 import {
   StyledPopBrowse,
   PopBrowseContainer,
@@ -18,13 +17,23 @@ import {
   ThemeDownCategories,
   PopBrowseForm,
   PopBrowseWrap,
+  PopBrowseContent,
+  SubTtlP,
 } from "./PopBrowsePage.styled";
 import { delTasks } from "../../../api";
 import { DayPicker } from "react-day-picker";
 import { TaskHook } from "../../hooks/useTaskHook";
 import { UserHook } from "../../hooks/useUserHook";
-import { WrapperCalendar } from "../PopNewCardPage/PopNewCard.styled";
+import {
+  CategoriesTheme,
+  WrapperCalendar,
+} from "../PopNewCardPage/PopNewCard.styled";
 import { format } from "date-fns";
+import {
+  PopBrowseStatus,
+  StatusThemeActive,
+  StatusThemes,
+} from "../EditTaskPage/EditTaskPage.styled";
 
 export default function PopBrowse() {
   let { id } = useParams();
@@ -45,21 +54,19 @@ export default function PopBrowse() {
     <StyledPopBrowse id="popBrowse">
       <PopBrowseContainer>
         <PopBrowseBlock>
-          <div className="pop-browse__content">
+          <PopBrowseContent>
             <PopBrowseTopBlock>
               <PopBrowseTtl>{dataTask.title}</PopBrowseTtl>
-              <div className="categories__theme theme-top _orange _active-category">
-                <CategoryName $themeColor="Web Design">Web Design</CategoryName>
-              </div>
+              <CategoriesTheme $active $hide $themeColor={dataTask.topic}>
+                {dataTask.topic}
+              </CategoriesTheme>
             </PopBrowseTopBlock>
-            <div className="pop-browse__status status">
-              <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme _gray">
-                  <p className="_gray">{dataTask.status}</p>
-                </div>
-              </div>
-            </div>
+            <PopBrowseStatus>
+              <SubTtlP>Статус</SubTtlP>
+              <StatusThemes>
+                <StatusThemeActive>{dataTask.status}</StatusThemeActive>
+              </StatusThemes>
+            </PopBrowseStatus>
             <PopBrowseWrap>
               <PopBrowseForm id="formBrowseCard" action="#">
                 <FormBrowseBlock>
@@ -79,7 +86,7 @@ export default function PopBrowse() {
                   mode="single"
                   // onSelect={setSelectedDay}
                   required
-                  // selected={selectedDay}
+                  selected={new Date(dataTask.date)}
                 />
 
                 <p>Срок исполнения: {format(dataTask.date, "dd.MM.yyyy")}</p>
@@ -87,9 +94,9 @@ export default function PopBrowse() {
             </PopBrowseWrap>
             <ThemeDownCategories>
               <CategoriesP>Категория</CategoriesP>
-              <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
+              <CategoriesTheme $active $themeColor={dataTask.topic}>
+                {dataTask.topic}
+              </CategoriesTheme>
             </ThemeDownCategories>
             <PopBrowseBtnBrowse>
               <ButtonGroup>
@@ -104,7 +111,7 @@ export default function PopBrowse() {
                 <Link to={AppRoutes.HOME}>Закрыть</Link>
               </ButtonMenu>
             </PopBrowseBtnBrowse>
-          </div>
+          </PopBrowseContent>
         </PopBrowseBlock>
       </PopBrowseContainer>
     </StyledPopBrowse>

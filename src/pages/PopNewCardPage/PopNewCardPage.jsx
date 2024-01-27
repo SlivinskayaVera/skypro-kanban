@@ -17,8 +17,8 @@ import {
   SubTtl,
   PopNewCardCategories,
   CategoriesTheme,
-  SubTtlP,
   WrapperCalendar,
+  PopNewCardClose,
 } from "./PopNewCard.styled";
 import { addTasks } from "../../../api";
 import { useState } from "react";
@@ -28,6 +28,7 @@ import "react-day-picker/dist/style.css";
 import { TaskHook } from "../../hooks/useTaskHook";
 import { UserHook } from "../../hooks/useUserHook";
 import { format } from "date-fns";
+import { SubTtlP } from "../BrowseCardPage/PopBrowsePage.styled";
 
 export default function PopNewCard() {
   const { setCards } = TaskHook();
@@ -35,23 +36,23 @@ export default function PopNewCard() {
 
   const [selectedDay, setSelectedDay] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
-  const [topic, setTopic] = useState(false);
   const [dataTask, setDataTask] = useState({
     nameTask: "",
     description: "",
+    topic: "",
   });
 
   const navigate = useNavigate(null);
 
   const handlerAddNewTask = async (event) => {
     event.preventDefault();
-    if (!dataTask.nameTask || !dataTask.description || !topic) return;
+    if (!dataTask.nameTask || !dataTask.description || !dataTask.topic) return;
 
     setIsLoading(true);
     const userData = JSON.parse(user);
     const token = userData.token;
 
-    await addTasks({ setCards, token, dataTask, selectedDay, topic });
+    await addTasks({ setCards, token, dataTask, selectedDay });
     await setIsLoading(false);
     navigate(AppRoutes.HOME);
   };
@@ -64,8 +65,8 @@ export default function PopNewCard() {
         <PopNewCardBlock>
           <PopNewCardContent>
             <PopNewCardTtl>Создание задачи</PopNewCardTtl>
-            <Link className="pop-new-card__close" to={AppRoutes.HOME}>
-              ✖
+            <Link to={AppRoutes.HOME}>
+              <PopNewCardClose>✖</PopNewCardClose>
             </Link>
             <PopNewCardWrap>
               <PopNewCardForm id="formNewCard" action="#">
@@ -104,14 +105,14 @@ export default function PopNewCard() {
                   required
                   selected={selectedDay}
                 />
-                <p>You selected {format(selectedDay, "PPP")}.</p>
+                <p>You selected {format(selectedDay, "dd.MM.yyyy")}.</p>
               </WrapperCalendar>
             </PopNewCardWrap>
             <PopNewCardCategories>
               <SubTtlP>Категория</SubTtlP>
               <CategoriesThemes>
                 <CategoriesTheme
-                  onClick={() => setTopic("Web Design")}
+                  onClick={() => setDataTask({...dataTask, topic: "Web Design"})}
                   $themeColor="Web Design"
                 >
                   <CategoryName $themeColor="Web Design">
@@ -120,13 +121,13 @@ export default function PopNewCard() {
                 </CategoriesTheme>
                 <CategoriesTheme
                   $themeColor="Research"
-                  onClick={() => setTopic("Research")}
+                  onClick={() => setDataTask({...dataTask, topic: "Research"})}
                 >
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>
                 <CategoriesTheme
                   $themeColor="Copywriting"
-                  onClick={() => setTopic("Copywriting")}
+                  onClick={() => setDataTask({...dataTask, topic: "Copywriting"})}
                 >
                   <CategoryName $themeColor="Copywriting">
                     Copywriting

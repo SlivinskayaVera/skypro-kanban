@@ -62,7 +62,6 @@ export async function addTasks({
   token,
   dataTask,
   selectedDay,
-  topic,
 }) {
 
   const response = await fetch(API_URL_TASKS, {
@@ -71,7 +70,7 @@ export async function addTasks({
     },
     body: JSON.stringify({
       title: dataTask.nameTask,
-      topic: topic,
+      topic: dataTask.topic,
       status: "Без статуса",
       description: dataTask.description,
       date: selectedDay,

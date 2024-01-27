@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppRoutes } from "../appRoutes";
-import { editTasks } from "../../../api";
+import { delTasks, editTasks } from "../../../api";
 import { DayPicker } from "react-day-picker";
 import { TaskHook } from "../../hooks/useTaskHook";
 import { UserHook } from "../../hooks/useUserHook";
@@ -21,6 +21,8 @@ import {
   ThemeDownCategories,
   PopBrowseForm,
   PopBrowseWrap,
+  PopBrowseContent,
+  SubTtlP,
 } from "../BrowseCardPage/PopBrowsePage.styled";
 import { useState } from "react";
 import {
@@ -49,22 +51,31 @@ export default function EditTaskPage() {
     date: dataTask.date,
   });
 
+  const handlerDeleteTask = async (event) => {
+    event.preventDefault();
+    const userData = JSON.parse(user);
+    const token = userData.token;
+    await delTasks({ setCards, id, token });
+    navigate(AppRoutes.HOME);
+  };
+
   const handlerEditTask = async (event) => {
     event.preventDefault();
     const userData = JSON.parse(user);
     const token = userData.token;
     await editTasks({ setCards, id, token, newDataTask });
-    navigate(AppRoutes.HOME);
-    // навигатор на карту с айди
+    navigate(`/card/${id}`);
   };
 
-  //   const statusTask = cards.filter((card) => card._id === id)[0].status;
+  function handlerCancelEditTask() {
+    navigate(`/card/${id}`);
+  }
 
   return (
     <StyledPopBrowse id="popBrowse">
       <PopBrowseContainer>
         <PopBrowseBlock>
-          <div className="pop-browse__content">
+          <PopBrowseContent>
             <PopBrowseTopBlock>
               <PopBrowseTtl>{newDataTask.title}</PopBrowseTtl>
               <CategoriesTheme $active $hide $themeColor={dataTask.topic}>
@@ -72,7 +83,7 @@ export default function EditTaskPage() {
               </CategoriesTheme>
             </PopBrowseTopBlock>
             <PopBrowseStatus>
-              <SubTtl>Статус</SubTtl>
+              <SubTtlP>Статус</SubTtlP>
               <StatusThemes>
                 <StatusTheme
                   onClick={() =>
@@ -137,12 +148,7 @@ export default function EditTaskPage() {
                   required
                   selected={selectedDay}
                 />
-                <p>
-                  Срок исполнения:{" "}
-                  <span className="date-control">
-                    {format(selectedDay, "dd.MM.yyyy")}
-                  </span>
-                </p>
+                <p>Срок исполнения: {format(selectedDay, "dd.MM.yyyy")}</p>
               </WrapperCalendar>
             </PopBrowseWrap>
             <ThemeDownCategories>
@@ -154,8 +160,10 @@ export default function EditTaskPage() {
             <PopBrowseBtnEdit>
               <ButtonGroup>
                 <ButtonMenu onClick={handlerEditTask}>Сохранить</ButtonMenu>
-                <ButtonActionForTest>Отменить</ButtonActionForTest>
-                <ButtonActionForTest id="btnDelete">
+                <ButtonActionForTest onClick={handlerCancelEditTask}>
+                  Отменить
+                </ButtonActionForTest>
+                <ButtonActionForTest onClick={handlerDeleteTask} id="btnDelete">
                   Удалить задачу
                 </ButtonActionForTest>
               </ButtonGroup>
@@ -163,7 +171,7 @@ export default function EditTaskPage() {
                 <Link to={AppRoutes.HOME}>Закрыть</Link>
               </ButtonMenu>
             </PopBrowseBtnEdit>
-          </div>
+          </PopBrowseContent>
         </PopBrowseBlock>
       </PopBrowseContainer>
     </StyledPopBrowse>

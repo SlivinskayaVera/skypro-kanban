@@ -225,13 +225,6 @@ const SubTtl = styled.label`
   line-height: normal;
 `;
 
-const SubTtlP = styled.p`
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-`;
-
 const PopNewCardCategories = styled.div`
   margin-bottom: 20px;
 `;
@@ -261,6 +254,18 @@ const CategoriesTheme = styled.button`
   }
 `;
 
+const PopNewCardClose = styled.span`
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #94a6be;
+  cursor: pointer;
+
+  &:hover {
+    color: #000000;
+  }
+`;
+
 export {
   StyledPopNewCard,
   PopNewCardContainer,
@@ -275,8 +280,8 @@ export {
   FormNewInput,
   FormNewArea,
   SubTtl,
-  SubTtlP,
   PopNewCardCategories,
   CategoriesTheme,
   WrapperCalendar,
+  PopNewCardClose,
 };
