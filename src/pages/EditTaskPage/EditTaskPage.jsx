@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppRoutes } from "../appRoutes";
 import { CategoryName } from "../../Components/Common/themeStyles";
-import { delTasks } from "../../../api";
+import { editTasks } from "../../../api";
 import { DayPicker } from "react-day-picker";
 import { TaskHook } from "../../hooks/useTaskHook";
 import { UserHook } from "../../hooks/useUserHook";
@@ -23,19 +23,28 @@ import {
   PopBrowseForm,
   PopBrowseWrap,
 } from "../BrowseCardPage/PopBrowsePage.styled";
-// import 'react-day-picker/dist/style.css';
+import { useState } from "react";
 
 export default function EditTaskPage() {
   let { id } = useParams();
   const { setCards, cards } = TaskHook();
+  const dataTask = cards.find((card) => card._id === id);
   const navigate = useNavigate(null);
   const { user } = UserHook();
+  const [newDataTask, setNewDataTask] = useState({
+    title: dataTask.title,
+    topic: dataTask.topic,
+    status: dataTask.status,
+    description: dataTask.description,
+    date: dataTask.date,
+  });
 
   const handlerEditTask = async (event) => {
     event.preventDefault();
     const token = user.token;
-    await delTasks({ setCards, id, token });
+    await editTasks({ setCards, id, token, newDataTask });
     navigate(AppRoutes.HOME);
+    // навигатор на карту с айди
   };
 
   const statusTask = cards.filter((card) => card._id === id)[0].status;
@@ -46,7 +55,7 @@ export default function EditTaskPage() {
         <PopBrowseBlock>
           <div className="pop-browse__content">
             <PopBrowseTopBlock>
-              <PopBrowseTtl>Название задачи</PopBrowseTtl>
+              <PopBrowseTtl>{newDataTask.title}</PopBrowseTtl>
               <div className="categories__theme theme-top _orange _active-category">
                 <CategoryName $themeColor="Web Design">Web Design</CategoryName>
               </div>
@@ -78,9 +87,9 @@ export default function EditTaskPage() {
                   <FormBrowseArea
                     name="text"
                     id="textArea01"
-                    readOnly=""
                     placeholder="Введите описание задачи..."
-                    defaultValue={""}
+                    defaultValue={dataTask.description}
+                    onChange={(e) => setNewDataTask({...newDataTask, description: e.target.value})}
                   />
                 </FormBrowseBlock>
               </PopBrowseForm>
@@ -92,7 +101,7 @@ export default function EditTaskPage() {
                 // selected={selectedDay}
               />
 
-              {/* <div className="pop-new-card__calendar calendar">
+              <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
                   <div className="calendar__nav">
@@ -196,7 +205,7 @@ export default function EditTaskPage() {
                     </p>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </PopBrowseWrap>
             <ThemeDownCategories>
               <CategoriesP>Категория</CategoriesP>

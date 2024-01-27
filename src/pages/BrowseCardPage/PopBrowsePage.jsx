@@ -36,9 +36,13 @@ export default function PopBrowse() {
     const token = user.token;
     await delTasks({ setCards, id, token });
     navigate(AppRoutes.HOME);
-  };
 
-  const statusTask = cards.filter((card) => card._id === id)[0].status;
+    
+  };
+  const dataTask = cards.find((card) => card._id === id);
+  const descriptionTask = cards.filter((card) => card._id === id)[0].description;
+
+
 
   return (
     <StyledPopBrowse id="popBrowse">
@@ -46,7 +50,7 @@ export default function PopBrowse() {
         <PopBrowseBlock>
           <div className="pop-browse__content">
             <PopBrowseTopBlock>
-              <PopBrowseTtl>Название задачи</PopBrowseTtl>
+              <PopBrowseTtl>{dataTask.title}</PopBrowseTtl>
               <div className="categories__theme theme-top _orange _active-category">
                 <CategoryName $themeColor="Web Design">Web Design</CategoryName>
               </div>
@@ -55,7 +59,7 @@ export default function PopBrowse() {
               <p className="status__p subttl">Статус</p>
               <div className="status__themes">
                 <div className="status__theme _gray">
-                  <p className="_gray">{statusTask}</p>
+                  <p className="_gray">{dataTask.status}</p>
                 </div>
               </div>
             </div>
@@ -68,7 +72,7 @@ export default function PopBrowse() {
                     id="textArea01"
                     readOnly=""
                     placeholder="Введите описание задачи..."
-                    defaultValue={""}
+                    defaultValue={descriptionTask}
                   />
                 </FormBrowseBlock>
               </PopBrowseForm>

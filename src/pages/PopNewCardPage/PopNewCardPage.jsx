@@ -33,7 +33,7 @@ export default function PopNewCard() {
 
   const [selectedDay, setSelectedDay] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
-  const [topic, setTopic] = useState("");
+  const [topic, setTopic] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [dataTask, setDataTask] = useState({
     nameTask: "",
@@ -44,9 +44,10 @@ export default function PopNewCard() {
 
   const handlerAddNewTask = async (event) => {
     event.preventDefault();
-    if (!dataTask.nameTask || !dataTask.description) return;
+    if (!dataTask.nameTask || !dataTask.description || !topic) return;
 
-    const token = user.token;
+    const userData = JSON.parse(user);
+    const token = userData.token;
     setIsActive(false);
 
     await setIsLoading(true);
@@ -117,18 +118,15 @@ export default function PopNewCard() {
                 <CategoriesTheme
                   onClick={() => setTopic("Web Design")}
                   $themeColor="Web Design"
-                  // className="_active-category"
                   $active={isActive}
                 >
                   <CategoryName $themeColor="Web Design">
                     Web Design
                   </CategoryName>
-
                 </CategoriesTheme>
                 <CategoriesTheme
                   $themeColor="Research"
                   onClick={() => setTopic("Research")}
-                  
                 >
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>
@@ -143,7 +141,6 @@ export default function PopNewCard() {
               </CategoriesThemes>
             </PopNewCardCategories>
             <FormNewCreate onClick={handlerAddNewTask} id="btnCreate">
-              {/* <Link to={AppRoutes.HOME}>Создать задачу</Link> */}
               Создать задачу
             </FormNewCreate>
           </PopNewCardContent>

@@ -187,10 +187,13 @@ const FormNewArea = styled.textarea`
   }
 
   &::placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1px;
     color: #94a6be;
+
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     letter-spacing: -0.14px;
   }
 
@@ -204,7 +207,8 @@ const SubTtl = styled.label`
   color: #000;
   font-size: 14px;
   font-weight: 600;
-  line-height: 1;
+  font-style: normal;
+  line-height: normal;
 `;
 
 const SubTtlP = styled.p`
@@ -226,12 +230,10 @@ const CategoriesTheme = styled.button`
   border-style: none;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: ${(props) => props.$active ? 1 : 0.4};
+  opacity: ${(props) => (props.$active ? 1 : 0.4)};
   background-color: ${(props) =>
     themeStyles[props.$themeColor].backgroundColor};
   color: ${(props) => themeStyles[props.$themeColor].color};
-
-
 
   p {
     font-size: 14px;

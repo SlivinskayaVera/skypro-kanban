@@ -4,7 +4,6 @@ import PopExit from "./pages/ExitPage/PopExit";
 import PopNewCard from "./pages/PopNewCardPage/PopNewCardPage.jsx";
 import PopBrowse from "./pages/BrowseCardPage/PopBrowsePage.jsx";
 import MainContent from "./pages/HomePage/HomePage";
-import { useState, useEffect } from "react";
 import { GlobalStyle } from "./Components/Common/GlobalStyle";
 import { AppRoutes } from "./pages/appRoutes";
 import { Routes, Route } from "react-router-dom";
@@ -12,37 +11,13 @@ import Error404 from "./pages/NotFoundPage/Error404.jsx";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute.jsx";
 import SingInPage from "./pages/SingInPage/SingInPage";
 import SingUpPage from "./pages/SingUpPage/SingUpPage";
-import LoadingPage from "./pages/LoadingPage/LoadingPage";
-import { getTasks } from "../api";
-import { UserHook } from "./hooks/useUserHook";
-import { TaskHook } from "./hooks/useTaskHook";
 import EditTaskPage from "./pages/EditTaskPage/EditTaskPage";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
-  const { isAuth } = UserHook();
-  const { setCards } = TaskHook();
-
-  useEffect(() => {
-    if (!isAuth) return;
-    getTasks({ setCards }).catch(() => {
-      setErrorMessage(true);
-    });
-    setIsLoading(false);
-  }, [isAuth, setCards]);
-
   return (
     <PageWrapper>
       <GlobalStyle />
-      <p>
-        {errorMessage
-          ? "Не удалось загрузить данные по задачам, попробуйте позже"
-          : ""}
-      </p>
-      {isLoading ? (
-        <LoadingPage />
-      ) : (
+
         <Routes>
           <Route element={<PrivateRoute />}>
             <Route path={AppRoutes.HOME} element={<MainContent />}>
@@ -58,7 +33,6 @@ function App() {
           <Route path={AppRoutes.SINGUP} element={<SingUpPage />} />
           <Route path={AppRoutes.NOT_FOUND} element={<Error404 />} />
         </Routes>
-      )}
     </PageWrapper>
   );
 }

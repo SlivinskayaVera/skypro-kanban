@@ -57,7 +57,13 @@ export async function getTasks({ setCards }) {
   return data.tasks;
 }
 
-export async function addTasks({ setCards, token, dataTask, selectedDay, topic }) {
+export async function addTasks({
+  setCards,
+  token,
+  dataTask,
+  selectedDay,
+  topic,
+}) {
 
   const response = await fetch(API_URL_TASKS, {
     headers: {
@@ -88,6 +94,29 @@ export async function delTasks({ setCards, id, token }) {
       Authorization: `Bearer ${token}`,
     },
     method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+  const data = await response.json();
+  setCards(data.tasks);
+  return data.tasks;
+}
+
+export async function editTasks({ setCards, id, token, newDataTask }) {
+  const response = await fetch(`${API_URL_TASKS}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title: newDataTask.title,
+      topic: newDataTask.topic,
+      status: newDataTask.status,
+      description: newDataTask.description,
+      date: newDataTask.date,
+    }),
+    method: "PUT",
   });
 
   if (!response.ok) {

@@ -14,14 +14,12 @@ import { Link } from "react-router-dom";
 import { UserHook } from "../../hooks/useUserHook";
 
 export default function PopExit() {
-  const { setIsAuth } = UserHook();
+  const { setUser } = UserHook();
 
   function handlerExit() {
-    localStorage.removeItem("userName");
     localStorage.removeItem("token");
-    localStorage.removeItem("userLogin");
     localStorage.removeItem("user");
-    setIsAuth(null);
+    setUser(null);
   }
 
   return (

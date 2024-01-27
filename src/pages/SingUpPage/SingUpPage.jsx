@@ -25,7 +25,7 @@ export default function SingUpPage() {
     login: "",
     password: "",
   });
-  const { setUser, user } = UserHook();
+  const { setUser } = UserHook();
 
   const handlerRegistration = async (event) => {
     event.preventDefault();
@@ -35,20 +35,23 @@ export default function SingUpPage() {
         setErrorMessage(true);
         return;
       }
-      const tokenRegistration = await registration({
+      const userRegistration = await registration({
         name: newUser.firstName,
         login: newUser.login,
         password: newUser.password,
       });
-      localStorage.user = JSON.stringify(tokenRegistration);
-      setUser(JSON.parse(localStorage.user));
-      console.log(user);
+      await localStorage.setItem("user", JSON.stringify(userRegistration));
+      await localStorage.setItem("token", userRegistration.token);
+
+      await setUser(localStorage.user);
       navigate(AppRoutes.HOME);
     } catch (error) {
       setWrongUserData(true);
     } finally {
-      setTimeout(() => setWrongUserData(null), 3000);
-      setTimeout(() => setErrorMessage(null), 3000);
+      setTimeout(() => {
+        setWrongUserData(null);
+        setErrorMessage(null);
+      }, 3000);
     }
   };
 
@@ -66,7 +69,6 @@ export default function SingUpPage() {
               action="#"
             >
               <ModalInput
-                className="first-name"
                 type="text"
                 name="firstName"
                 id="first-name"
@@ -76,7 +78,6 @@ export default function SingUpPage() {
                 }
               />
               <ModalInput
-                className="login"
                 type="text"
                 name="login"
                 id="loginReg"
@@ -86,7 +87,6 @@ export default function SingUpPage() {
                 }
               />
               <ModalInput
-                className="password-first"
                 type="password"
                 name="password"
                 id="passwordFirst"
@@ -113,14 +113,10 @@ export default function SingUpPage() {
                 id="SignUpEnter"
               >
                 Зарегистрироваться
-                {/* to={AppRoutes.HOME} */}
-                {/* <Link type="submit">Зарегистрироваться</Link> */}
               </ModalBtnSignUpEnt>
               <ModalFormGroup>
-                <p>
-                  Уже есть аккаунт?{" "}
-                  <Link to={AppRoutes.SIGNIN}>Войдите здесь</Link>
-                </p>
+                <p>Уже есть аккаунт?</p>
+                <Link to={AppRoutes.SIGNIN}>Войдите здесь</Link>
               </ModalFormGroup>
             </ModalFormLogin>
           </ModalBlock>

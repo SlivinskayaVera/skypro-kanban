@@ -17,7 +17,6 @@ import { useState } from "react";
 import { UserHook } from "../../hooks/useUserHook";
 
 export default function SingInPage() {
-  const { setIsAuth } = UserHook();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const [wrongUserData, setWrongUserData] = useState(null);
@@ -40,20 +39,18 @@ export default function SingInPage() {
         login: userInput.login,
         password: userInput.password,
       });
-
       await localStorage.setItem("user", JSON.stringify(userData));
-      await setUser(JSON.parse(localStorage.user));
-      localStorage.userName = userData.name;
-      localStorage.token = userData.token;
-      localStorage.userLogin = userData.login;
+      await localStorage.setItem("token", userData.token);
+      await setUser(localStorage.user);
 
-      setIsAuth(localStorage.token);
       navigate(AppRoutes.HOME);
     } catch (error) {
       setWrongUserData(true);
     } finally {
-      setTimeout(() => setWrongUserData(null), 3000);
-      setTimeout(() => setErrorMessage(null), 3000);
+      setTimeout(() => {
+        setErrorMessage(null);
+        setWrongUserData(null);
+      }, 3000);
     }
   };
 
