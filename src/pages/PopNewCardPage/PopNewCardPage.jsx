@@ -121,7 +121,6 @@ export default function PopNewCard() {
                 <CategoriesTheme
                   $themeColor="Research"
                   onClick={() => setTopic("Research")}
-                  checked
                 >
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>

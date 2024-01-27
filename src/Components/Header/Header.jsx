@@ -20,7 +20,6 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = UserHook();
 
-
   function openMenu() {
     setIsOpen((previous) => !previous);
   }
@@ -43,9 +42,7 @@ export default function Header() {
           </div>
           <HeaderNav>
             <HeaderBtnMainNew id="btnMainNew">
-              <Link to={AppRoutes.NEW_CARD}>
-                Создать новую задачу
-              </Link>
+              <Link to={AppRoutes.NEW_CARD}>Создать новую задачу</Link>
             </HeaderBtnMainNew>
             <HeaderUser onClick={openMenu}>{getUser.name}</HeaderUser>
             {isOpen && (
@@ -54,7 +51,7 @@ export default function Header() {
                 <PopUserSetMail>{getUser.login}</PopUserSetMail>
                 <PopUserSetTheme>
                   <p>Темная тема</p>
-                  <input type="checkbox" className="checkbox" name="checkbox" />
+                  <input type="checkbox" name="checkbox" />
                 </PopUserSetTheme>
                 <ExitBtn type="button">
                   <Link to={AppRoutes.EXIT}>Выйти</Link>

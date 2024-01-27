@@ -116,6 +116,7 @@ const PopNewCardForm = styled.form`
 const WrapperCalendar = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 25px;
 
   p {
     padding-left: 27px;
@@ -243,7 +244,7 @@ const CategoriesTheme = styled.button`
   border-style: none;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: 0.4;
+  opacity: ${(props) => (props.$active ? 1 : 0.4)};
   background-color: ${(props) =>
     themeStyles[props.$themeColor].backgroundColor};
   color: ${(props) => themeStyles[props.$themeColor].color};
@@ -253,6 +254,10 @@ const CategoriesTheme = styled.button`
     font-weight: 600;
     line-height: 14px;
     white-space: nowrap;
+  }
+
+  @media screen and (max-width: ${breakpoints.md}px) {
+    display: ${(props) => (props.$hide ? "none" : "inline-block")};
   }
 `;
 
