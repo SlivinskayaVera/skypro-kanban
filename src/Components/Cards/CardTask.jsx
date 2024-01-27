@@ -22,7 +22,7 @@ function CardTask({ theme, title, date, id }) {
           <CardTheme $themeColor={theme}>
             <ThemeP>{theme}</ThemeP>
           </CardTheme>
-          <Link to={`/card/${id}`}>
+          <Link to={`/edit-card/${id}`}>
             <CardBtn>
               <div />
               <div />
