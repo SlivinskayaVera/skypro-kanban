@@ -199,7 +199,7 @@ const PopBrowseBtnEdit = styled.div`
     margin-bottom: 10px;
     padding: 0 14px;
   }
-  ${hide}
+  /* ${hide} */
   @media screen and (max-width: ${breakpoints.md}px) {
     button {
       width: 100%;

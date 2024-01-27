@@ -13,7 +13,6 @@ import {
   ButtonMenu,
   ButtonActionForTest,
   ButtonGroup,
-  PopBrowseBtnEdit,
   PopBrowseBtnBrowse,
   CategoriesP,
   ThemeDownCategories,
@@ -80,7 +79,6 @@ export default function PopBrowse() {
                 required
                 // selected={selectedDay}
               />
-
               {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
@@ -196,7 +194,7 @@ export default function PopBrowse() {
             <PopBrowseBtnBrowse>
               <ButtonGroup>
                 <ButtonActionForTest>
-                <Link to={`/card/${id}`}>Редактировать задачу</Link>
+                  <Link to={`/edit-card/${id}`}>Редактировать задачу</Link>
                 </ButtonActionForTest>
                 <ButtonActionForTest onClick={handlerDeleteTask}>
                   <a href="#">Удалить задачу</a>
@@ -206,7 +204,7 @@ export default function PopBrowse() {
                 <Link to={AppRoutes.HOME}>Закрыть</Link>
               </ButtonMenu>
             </PopBrowseBtnBrowse>
-            <PopBrowseBtnEdit>
+            {/* <PopBrowseBtnEdit>
               <ButtonGroup>
                 <ButtonMenu>
                   <a href="#">Сохранить</a>
@@ -221,7 +219,7 @@ export default function PopBrowse() {
               <ButtonMenu>
                 <Link to={AppRoutes.HOME}>Закрыть</Link>
               </ButtonMenu>
-            </PopBrowseBtnEdit>
+            </PopBrowseBtnEdit> */}
           </div>
         </PopBrowseBlock>
       </PopBrowseContainer>
