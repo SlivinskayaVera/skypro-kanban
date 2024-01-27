@@ -1,7 +1,6 @@
 import { CardTheme } from "./CardTheme";
 import { ThemeP } from "../ThemeP/ThemeP";
 import { Link } from "react-router-dom";
-import { AppRoutes } from "../../pages/appRoutes";
 import {
   CardGroup,
   CardsItem,
@@ -23,7 +22,7 @@ function CardTask({ theme, title, date, id }) {
           <CardTheme $themeColor={theme}>
             <ThemeP>{theme}</ThemeP>
           </CardTheme>
-          <Link to={AppRoutes.CARD}>
+          <Link to={`/card/${id}`}>
             <CardBtn>
               <div />
               <div />

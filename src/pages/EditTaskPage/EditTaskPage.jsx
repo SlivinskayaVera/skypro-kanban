@@ -1,11 +1,15 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppRoutes } from "../appRoutes";
 import { CategoryName } from "../../Components/Common/themeStyles";
+import { delTasks } from "../../../api";
+import { DayPicker } from "react-day-picker";
+import { TaskHook } from "../../hooks/useTaskHook";
+import { UserHook } from "../../hooks/useUserHook";
 import {
+  PopBrowseTopBlock,
   StyledPopBrowse,
   PopBrowseContainer,
   PopBrowseBlock,
-  PopBrowseTopBlock,
   PopBrowseTtl,
   FormBrowseBlock,
   SubTtl,
@@ -14,25 +18,20 @@ import {
   ButtonActionForTest,
   ButtonGroup,
   PopBrowseBtnEdit,
-  PopBrowseBtnBrowse,
   CategoriesP,
   ThemeDownCategories,
   PopBrowseForm,
   PopBrowseWrap,
-} from "./PopBrowsePage.styled";
-import { delTasks } from "../../../api";
-import { DayPicker } from "react-day-picker";
-import { TaskHook } from "../../hooks/useTaskHook";
-import { UserHook } from "../../hooks/useUserHook";
+} from "../BrowseCardPage/PopBrowsePage.styled";
 // import 'react-day-picker/dist/style.css';
 
-export default function PopBrowse() {
+export default function EditTaskPage() {
   let { id } = useParams();
   const { setCards, cards } = TaskHook();
   const navigate = useNavigate(null);
   const { user } = UserHook();
 
-  const handlerDeleteTask = async (event) => {
+  const handlerEditTask = async (event) => {
     event.preventDefault();
     const token = user.token;
     await delTasks({ setCards, id, token });
@@ -55,8 +54,20 @@ export default function PopBrowse() {
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
               <div className="status__themes">
+                <div className="status__theme">
+                  <p>Без статуса</p>
+                </div>
                 <div className="status__theme _gray">
                   <p className="_gray">{statusTask}</p>
+                </div>
+                <div className="status__theme">
+                  <p>В работе</p>
+                </div>
+                <div className="status__theme">
+                  <p>Тестирование</p>
+                </div>
+                <div className="status__theme">
+                  <p>Готово</p>
                 </div>
               </div>
             </div>
@@ -193,29 +204,12 @@ export default function PopBrowse() {
                 <p className="_orange">Web Design</p>
               </div>
             </ThemeDownCategories>
-            <PopBrowseBtnBrowse>
-              <ButtonGroup>
-                <ButtonActionForTest>
-                <Link to={`/card/${id}`}>Редактировать задачу</Link>
-                </ButtonActionForTest>
-                <ButtonActionForTest onClick={handlerDeleteTask}>
-                  <a href="#">Удалить задачу</a>
-                </ButtonActionForTest>
-              </ButtonGroup>
-              <ButtonMenu>
-                <Link to={AppRoutes.HOME}>Закрыть</Link>
-              </ButtonMenu>
-            </PopBrowseBtnBrowse>
             <PopBrowseBtnEdit>
               <ButtonGroup>
-                <ButtonMenu>
-                  <a href="#">Сохранить</a>
-                </ButtonMenu>
-                <ButtonActionForTest>
-                  <a href="#">Отменить</a>
-                </ButtonActionForTest>
+                <ButtonMenu onClick={handlerEditTask}>Сохранить</ButtonMenu>
+                <ButtonActionForTest>Отменить</ButtonActionForTest>
                 <ButtonActionForTest id="btnDelete">
-                  <a href="#">Удалить задачу</a>
+                  Удалить задачу
                 </ButtonActionForTest>
               </ButtonGroup>
               <ButtonMenu>

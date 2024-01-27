@@ -16,9 +16,10 @@ import LoadingPage from "./pages/LoadingPage/LoadingPage";
 import { getTasks } from "../api";
 import { UserHook } from "./hooks/useUserHook";
 import { TaskHook } from "./hooks/useTaskHook";
+import EditTaskPage from "./pages/EditTaskPage/EditTaskPage";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const { isAuth } = UserHook();
   const { setCards } = TaskHook();
@@ -48,6 +49,8 @@ function App() {
               <Route path={AppRoutes.NEW_CARD} element={<PopNewCard />} />
               <Route path={AppRoutes.EXIT} element={<PopExit />} />
               <Route path={AppRoutes.CARD} element={<PopBrowse />} />
+              <Route path={AppRoutes.EDIT_CARD} element={<EditTaskPage />} />
+
             </Route>
           </Route>
 
