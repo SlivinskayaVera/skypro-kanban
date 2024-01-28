@@ -69,6 +69,8 @@ export default function SingUpPage() {
               action="#"
             >
               <ModalInput
+                $errorMessage={errorMessage}
+                $wrongUserData={wrongUserData}
                 type="text"
                 name="firstName"
                 id="first-name"
@@ -78,6 +80,8 @@ export default function SingUpPage() {
                 }
               />
               <ModalInput
+                $errorMessage={errorMessage}
+                $wrongUserData={wrongUserData}
                 type="text"
                 name="login"
                 id="loginReg"
@@ -87,6 +91,8 @@ export default function SingUpPage() {
                 }
               />
               <ModalInput
+                $errorMessage={errorMessage}
+                $wrongUserData={wrongUserData}
                 type="password"
                 name="password"
                 id="passwordFirst"

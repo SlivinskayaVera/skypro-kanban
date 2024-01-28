@@ -12,6 +12,12 @@ const StyledHeader = styled.header`
   background-color: #ffffff;
 `;
 
+const HeaderLogo = styled.div`
+  img {
+    width: 85px;
+  }
+`;
+
 const HeaderBlock = styled.div`
   height: 70px;
   display: flex;
@@ -183,6 +189,7 @@ const HeaderUser = styled.a`
 `;
 
 export {
+  HeaderLogo,
   StyledHeader,
   HeaderBlock,
   HeaderNav,

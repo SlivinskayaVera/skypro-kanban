@@ -81,6 +81,7 @@ export default function PopBrowse() {
                 </FormBrowseBlock>
               </PopBrowseForm>
               <WrapperCalendar>
+                <SubTtlP>Даты</SubTtlP>
                 <DayPicker
                   showOutsideDays
                   mode="single"

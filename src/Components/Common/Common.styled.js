@@ -28,7 +28,8 @@ const Image = styled.img`
 
 const hover01 = css`
   &:hover {
-    background-color: #33399b;
+    background-color: ${(props) =>
+      props.$errorMessage || props.$wrongUserData ? "#94A6BE" : "#33399b"};
   }
 `;
 

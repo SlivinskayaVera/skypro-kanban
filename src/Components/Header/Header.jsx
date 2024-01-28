@@ -12,6 +12,7 @@ import {
   HeaderBtnMainNew,
   HeaderUser,
   ExitBtn,
+  HeaderLogo,
 } from "./Header.styled";
 import { Container } from "../Common/Common.styled";
 import { UserHook } from "../../hooks/useUserHook";
@@ -30,16 +31,16 @@ export default function Header() {
     <StyledHeader>
       <Container>
         <HeaderBlock>
-          <div className="header__logo _show _light">
-            <Link to={AppRoutes.HOME} target="_self">
-              <img src="./public/images/logo.png" alt="logo" />
+          <HeaderLogo className="_show _light">
+            <Link to={AppRoutes.HOME}>
+              <img src="/images/logo.png" alt="logo" />
             </Link>
-          </div>
-          <div className="header__logo _dark">
-            <Link to={AppRoutes.HOME} target="_self">
-              <img src="./public/images/logo_dark.png" alt="logo" />
+          </HeaderLogo>
+          <HeaderLogo className="_dark">
+            <Link to={AppRoutes.HOME}>
+              <img src="/images/logo_dark.png" alt="logo" />
             </Link>
-          </div>
+          </HeaderLogo>
           <HeaderNav>
             <HeaderBtnMainNew id="btnMainNew">
               <Link to={AppRoutes.NEW_CARD}>Создать новую задачу</Link>

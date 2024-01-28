@@ -98,6 +98,7 @@ export default function PopNewCard() {
                 </FormNewBlock>
               </PopNewCardForm>
               <WrapperCalendar>
+                <SubTtlP>Даты</SubTtlP>
                 <DayPicker
                   showOutsideDays
                   mode="single"
@@ -112,7 +113,9 @@ export default function PopNewCard() {
               <SubTtlP>Категория</SubTtlP>
               <CategoriesThemes>
                 <CategoriesTheme
-                  onClick={() => setDataTask({...dataTask, topic: "Web Design"})}
+                  onClick={() =>
+                    setDataTask({ ...dataTask, topic: "Web Design" })
+                  }
                   $themeColor="Web Design"
                 >
                   <CategoryName $themeColor="Web Design">
@@ -121,13 +124,17 @@ export default function PopNewCard() {
                 </CategoriesTheme>
                 <CategoriesTheme
                   $themeColor="Research"
-                  onClick={() => setDataTask({...dataTask, topic: "Research"})}
+                  onClick={() =>
+                    setDataTask({ ...dataTask, topic: "Research" })
+                  }
                 >
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>
                 <CategoriesTheme
                   $themeColor="Copywriting"
-                  onClick={() => setDataTask({...dataTask, topic: "Copywriting"})}
+                  onClick={() =>
+                    setDataTask({ ...dataTask, topic: "Copywriting" })
+                  }
                 >
                   <CategoryName $themeColor="Copywriting">
                     Copywriting

@@ -1,4 +1,3 @@
-import "./App.css";
 import PageWrapper from "./Components/Wrappers/PageWrapper.jsx";
 import PopExit from "./pages/ExitPage/PopExit";
 import PopNewCard from "./pages/PopNewCardPage/PopNewCardPage.jsx";

@@ -33,6 +33,7 @@ export default function SingInPage() {
     try {
       if (!userInput.login || !userInput.password) {
         setErrorMessage(true);
+        setWrongUserData(true);
         return;
       }
       const userData = await loginInApp({
@@ -72,7 +73,7 @@ export default function SingInPage() {
                 type="text"
                 name="login"
                 id="formlogin"
-                placeholder="Логин"
+                placeholder="Эл. почта"
                 onChange={(e) =>
                   setUserInput({ ...userInput, login: e.target.value })
                 }
@@ -94,6 +95,7 @@ export default function SingInPage() {
               </MessageError>
               <ModalBtnEnter
                 disabled={wrongUserData}
+                $wrongUserData={wrongUserData}
                 type="submit"
                 id="btnEnter"
               >

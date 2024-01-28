@@ -105,7 +105,6 @@ const SubTtlP = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  padding-bottom: 14px;
 `;
 
 const FormBrowseArea = styled.textarea`

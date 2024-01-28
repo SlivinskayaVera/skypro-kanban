@@ -141,6 +141,7 @@ export default function EditTaskPage() {
                 </FormBrowseBlock>
               </PopBrowseForm>
               <WrapperCalendar>
+                <SubTtlP>Даты</SubTtlP>
                 <DayPicker
                   showOutsideDays
                   mode="single"

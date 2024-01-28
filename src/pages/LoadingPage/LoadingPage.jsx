@@ -4,7 +4,7 @@ import { Modal } from "../SingInPage/singInPage.styled";
 export default function LoadingPage() {
   return (
     <Modal>
-      <Image src="../public/images/zhdun.png" />
+      <Image src="/images/zhdun.png" />
       <TextErrorAndLoading>Downloading, wait...</TextErrorAndLoading>
     </Modal>
   );
