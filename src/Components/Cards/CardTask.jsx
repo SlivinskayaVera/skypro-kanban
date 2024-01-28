@@ -1,7 +1,6 @@
 import { CardTheme } from "./CardTheme";
 import { ThemeP } from "../ThemeP/ThemeP";
 import { Link } from "react-router-dom";
-import { AppRoutes } from "../../pages/appRoutes";
 import {
   CardGroup,
   CardsItem,
@@ -13,7 +12,7 @@ import {
 } from "./Card.styled";
 import { format, parseISO } from "date-fns";
 
-function CardTask({ theme, title, date }) {
+function CardTask({ theme, title, date, id }) {
   const correctDate = format(new Date(parseISO(date)), "dd.MM.yyyy");
 
   return (
@@ -23,8 +22,7 @@ function CardTask({ theme, title, date }) {
           <CardTheme $themeColor={theme}>
             <ThemeP>{theme}</ThemeP>
           </CardTheme>
-          <Link to={AppRoutes.CARD} target="_self">
-            {/* <a href="#popBrowse" target="_self"> */}
+          <Link to={`/edit-card/${id}`}>
             <CardBtn>
               <div />
               <div />
@@ -33,8 +31,7 @@ function CardTask({ theme, title, date }) {
           </Link>
         </CardGroup>
         <CardContent>
-          <Link to={AppRoutes.CARD} target="_self">
-            {/* <a href="" target="_blank"> */}
+          <Link to={`/card/${id}`}>
             <CardTitle>{title}</CardTitle>
           </Link>
           <CardDate>

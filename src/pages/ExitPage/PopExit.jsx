@@ -11,11 +11,15 @@ import {
   PopExitExitNo,
 } from "./PopExit.styled";
 import { Link } from "react-router-dom";
+import { UserHook } from "../../hooks/useUserHook";
 
-export default function PopExit({ setIsAuth }) {
+export default function PopExit() {
+  const { setUser } = UserHook();
+
   function handlerExit() {
-    localStorage.clear();
-    setIsAuth(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
   }
 
   return (

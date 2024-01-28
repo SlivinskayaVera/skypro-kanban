@@ -139,6 +139,9 @@ const ModalBtnSignUpEnt = styled.button`
 
 const ModalFormGroup = styled.div`
   text-align: center;
+  display: flex;
+
+  flex-wrap: nowrap;
 
   p,
   a {
@@ -147,6 +150,7 @@ const ModalFormGroup = styled.div`
     font-weight: 400;
     line-height: 150%;
     letter-spacing: -0.14px;
+    padding-left: 5px;
   }
 
   a {

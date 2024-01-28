@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { hover01 } from "../../Common/Common.styled";
-import { breakpoints } from "../../Common/breakpoints";
-import { themeStyles } from "../../Common/themeStyles";
+import { hover01 } from "../../Components/Common/Common.styled";
+import { breakpoints } from "../../Components/Common/breakpoints";
+import { themeStyles } from "../../Components/Common/themeStyles";
 
 const StyledPopNewCard = styled.div`
-  display: none;
+  display: block;
   width: 100%;
   min-width: 375px;
   height: 100%;
@@ -93,6 +93,11 @@ const CategoriesThemes = styled.div`
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
+  margin-top: 14px;
+
+  button:focus {
+    opacity: 1;
+  }
 `;
 
 const PopNewCardForm = styled.form`
@@ -105,6 +110,16 @@ const PopNewCardForm = styled.form`
     max-width: 100%;
     width: 100%;
     display: block;
+  }
+`;
+
+const WrapperCalendar = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+
+  p {
+    padding-left: 27px;
   }
 `;
 
@@ -186,10 +201,13 @@ const FormNewArea = styled.textarea`
   }
 
   &::placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1px;
     color: #94a6be;
+
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     letter-spacing: -0.14px;
   }
 
@@ -203,28 +221,23 @@ const SubTtl = styled.label`
   color: #000;
   font-size: 14px;
   font-weight: 600;
-  line-height: 1;
-`;
-
-const SubTtlP = styled.p`
-  color: #000;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
+  font-style: normal;
+  line-height: normal;
 `;
 
 const PopNewCardCategories = styled.div`
   margin-bottom: 20px;
 `;
 
-const CategoriesTheme = styled.div`
+const CategoriesTheme = styled.button`
   display: inline-block;
   width: auto;
   height: 30px;
   padding: 8px 20px;
+  border-style: none;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: 0.4;
+  opacity: ${(props) => (props.$active ? 1 : 0.4)};
   background-color: ${(props) =>
     themeStyles[props.$themeColor].backgroundColor};
   color: ${(props) => themeStyles[props.$themeColor].color};
@@ -234,6 +247,22 @@ const CategoriesTheme = styled.div`
     font-weight: 600;
     line-height: 14px;
     white-space: nowrap;
+  }
+
+  @media screen and (max-width: ${breakpoints.md}px) {
+    display: ${(props) => (props.$hide ? "none" : "inline-block")};
+  }
+`;
+
+const PopNewCardClose = styled.span`
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #94a6be;
+  cursor: pointer;
+
+  &:hover {
+    color: #000000;
   }
 `;
 
@@ -251,7 +280,8 @@ export {
   FormNewInput,
   FormNewArea,
   SubTtl,
-  SubTtlP,
   PopNewCardCategories,
   CategoriesTheme,
+  WrapperCalendar,
+  PopNewCardClose,
 };

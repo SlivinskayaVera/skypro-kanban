@@ -14,40 +14,43 @@ import {
 import { MessageError } from "../../Components/Common/Common.styled";
 import { loginInApp } from "../../../api";
 import { useState } from "react";
+import { UserHook } from "../../hooks/useUserHook";
 
-export default function SingInPage({ setIsAuth }) {
+export default function SingInPage() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const [wrongUserData, setWrongUserData] = useState(null);
-  const [user, setUser] = useState({
+  const [userInput, setUserInput] = useState({
     login: "",
     password: "",
   });
+
+  const { setUser } = UserHook();
 
   const handlerLoginInApp = async (event) => {
     event.preventDefault();
 
     try {
-      if (!user.login || !user.password) {
+      if (!userInput.login || !userInput.password) {
         setErrorMessage(true);
         return;
       }
       const userData = await loginInApp({
-        login: user.login,
-        password: user.password,
+        login: userInput.login,
+        password: userInput.password,
       });
+      await localStorage.setItem("user", JSON.stringify(userData));
+      await localStorage.setItem("token", userData.token);
+      await setUser(localStorage.user);
 
-      localStorage.userName = userData.name;
-      localStorage.token = userData.token;
-      localStorage.userLogin = userData.login;
-
-      setIsAuth(localStorage.token);
       navigate(AppRoutes.HOME);
     } catch (error) {
       setWrongUserData(true);
     } finally {
-      setTimeout(() => setWrongUserData(null), 3000);
-      setTimeout(() => setErrorMessage(null), 3000);
+      setTimeout(() => {
+        setErrorMessage(null);
+        setWrongUserData(null);
+      }, 3000);
     }
   };
 
@@ -70,7 +73,9 @@ export default function SingInPage({ setIsAuth }) {
                 name="login"
                 id="formlogin"
                 placeholder="Логин"
-                onChange={(e) => setUser({ ...user, login: e.target.value })}
+                onChange={(e) =>
+                  setUserInput({ ...userInput, login: e.target.value })
+                }
               />
               <ModalInput
                 $wrongUserData={wrongUserData}
@@ -78,7 +83,9 @@ export default function SingInPage({ setIsAuth }) {
                 name="password"
                 id="formpassword"
                 placeholder="Пароль"
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                onChange={(e) =>
+                  setUserInput({ ...userInput, password: e.target.value })
+                }
               />
               <MessageError style={{ color: "red" }}>
                 {errorMessage || wrongUserData

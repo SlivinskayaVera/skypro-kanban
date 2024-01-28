@@ -16,8 +16,8 @@ export async function registration({ name, login, password }) {
   }
 
   const data = await response.json();
-  const token = await data.user.token;
-  return token;
+  const userData = await data.user;
+  return userData;
 }
 
 export async function loginInApp({ login, password }) {
@@ -57,19 +57,23 @@ export async function getTasks({ setCards }) {
   return data.tasks;
 }
 
-export async function addTasks({ setCards }) {
-  const token = localStorage.getItem("token");
+export async function addTasks({
+  setCards,
+  token,
+  dataTask,
+  selectedDay,
+}) {
 
   const response = await fetch(API_URL_TASKS, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      title: "Новая задача 4!",
-      topic: "Web Design",
-      status: "Нужно сделать",
-      description: "Подробное описание задачи",
-      date: "2024-01-19T16:26:18.179Z",
+      title: dataTask.nameTask,
+      topic: dataTask.topic,
+      status: "Без статуса",
+      description: dataTask.description,
+      date: selectedDay,
     }),
     method: "POST",
   });
@@ -78,7 +82,46 @@ export async function addTasks({ setCards }) {
     throw new Error("Ошибка сервера");
   }
 
-  const taskList = await response.json();
-  setCards(taskList.tasks);
-  return taskList.tasks;
+  const data = await response.json();
+  setCards(data.tasks);
+  return data.tasks;
+}
+
+export async function delTasks({ setCards, id, token }) {
+  const response = await fetch(`${API_URL_TASKS}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+  const data = await response.json();
+  setCards(data.tasks);
+  return data.tasks;
+}
+
+export async function editTasks({ setCards, id, token, newDataTask }) {
+  const response = await fetch(`${API_URL_TASKS}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title: newDataTask.title,
+      topic: newDataTask.topic,
+      status: newDataTask.status,
+      description: newDataTask.description,
+      date: newDataTask.date,
+    }),
+    method: "PUT",
+  });
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+  const data = await response.json();
+  setCards(data.tasks);
+  return data.tasks;
 }
