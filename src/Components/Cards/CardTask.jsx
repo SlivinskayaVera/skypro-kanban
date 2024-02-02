@@ -11,15 +11,19 @@ import {
   CardBtn,
 } from "./Card.styled";
 import { format, parseISO } from "date-fns";
+import { ThemeHook } from "../../hooks/useThemeHook";
 
 function CardTask({ theme, title, date, id }) {
   const correctDate = format(new Date(parseISO(date)), "dd.MM.yyyy");
 
+  const { changeTheme } = ThemeHook();
+
+
   return (
     <CardsItem>
-      <CardsCard>
+      <CardsCard $changeTheme={changeTheme}>
         <CardGroup>
-          <CardTheme $themeColor={theme}>
+          <CardTheme $changeTheme={changeTheme} $themeColor={theme}>
             <ThemeP>{theme}</ThemeP>
           </CardTheme>
           <Link to={`/edit-card/${id}`}>
@@ -32,7 +36,7 @@ function CardTask({ theme, title, date, id }) {
         </CardGroup>
         <CardContent>
           <Link to={`/card/${id}`}>
-            <CardTitle>{title}</CardTitle>
+            <CardTitle $changeTheme={changeTheme}>{title}</CardTitle>
           </Link>
           <CardDate>
             <svg

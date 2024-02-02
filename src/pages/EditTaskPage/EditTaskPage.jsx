@@ -35,6 +35,7 @@ import {
   StatusTheme,
   StatusThemes,
 } from "./EditTaskPage.styled";
+import { ThemeHook } from "../../hooks/useThemeHook";
 
 export default function EditTaskPage() {
   let { id } = useParams();
@@ -71,19 +72,23 @@ export default function EditTaskPage() {
     navigate(`/card/${id}`);
   }
 
+  const { changeTheme } = ThemeHook();
+
   return (
     <StyledPopBrowse id="popBrowse">
       <PopBrowseContainer>
-        <PopBrowseBlock>
+        <PopBrowseBlock $changeTheme={changeTheme}>
           <PopBrowseContent>
             <PopBrowseTopBlock>
-              <PopBrowseTtl>{newDataTask.title}</PopBrowseTtl>
-              <CategoriesTheme $active $hide $themeColor={dataTask.topic}>
+              <PopBrowseTtl $changeTheme={changeTheme}>
+                {newDataTask.title}
+              </PopBrowseTtl>
+              <CategoriesTheme $changeTheme={changeTheme} $active $hide $themeColor={dataTask.topic}>
                 {dataTask.topic}
               </CategoriesTheme>
             </PopBrowseTopBlock>
             <PopBrowseStatus>
-              <SubTtlP>Статус</SubTtlP>
+              <SubTtlP $changeTheme={changeTheme}>Статус</SubTtlP>
               <StatusThemes>
                 <StatusTheme
                   onClick={() =>
@@ -125,8 +130,11 @@ export default function EditTaskPage() {
             <PopBrowseWrap>
               <PopBrowseForm id="formBrowseCard" action="#">
                 <FormBrowseBlock>
-                  <SubTtl htmlFor="textArea01">Описание задачи</SubTtl>
+                  <SubTtl $changeTheme={changeTheme} htmlFor="textArea01">
+                    Описание задачи
+                  </SubTtl>
                   <FormBrowseArea
+                    $changeTheme={changeTheme}
                     name="text"
                     id="textArea01"
                     placeholder="Введите описание задачи..."
@@ -141,7 +149,7 @@ export default function EditTaskPage() {
                 </FormBrowseBlock>
               </PopBrowseForm>
               <WrapperCalendar>
-                <SubTtlP>Даты</SubTtlP>
+                <SubTtlP $changeTheme={changeTheme}>Даты</SubTtlP>
                 <DayPicker
                   showOutsideDays
                   mode="single"
@@ -161,10 +169,10 @@ export default function EditTaskPage() {
             <PopBrowseBtnEdit>
               <ButtonGroup>
                 <ButtonMenu onClick={handlerEditTask}>Сохранить</ButtonMenu>
-                <ButtonActionForTest onClick={handlerCancelEditTask}>
+                <ButtonActionForTest $changeTheme={changeTheme} onClick={handlerCancelEditTask}>
                   Отменить
                 </ButtonActionForTest>
-                <ButtonActionForTest onClick={handlerDeleteTask} id="btnDelete">
+                <ButtonActionForTest $changeTheme={changeTheme} onClick={handlerDeleteTask} id="btnDelete">
                   Удалить задачу
                 </ButtonActionForTest>
               </ButtonGroup>

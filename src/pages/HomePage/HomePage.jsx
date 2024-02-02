@@ -14,6 +14,7 @@ import { UserHook } from "../../hooks/useUserHook.js";
 import { TaskHook } from "../../hooks/useTaskHook.js";
 import LoadingCards from "../LoadingPagesForHomePage/LoadingCards.jsx";
 import LoadingCardsError from "../LoadingPagesForHomePage/LoadingCardsError.jsx";
+import { ThemeHook } from "../../hooks/useThemeHook.js";
 
 export default function MainContent() {
   const { cards } = useContext(TasksContext);
@@ -28,8 +29,10 @@ export default function MainContent() {
     });
   }, [user, setCards]);
 
+  const { changeTheme } = ThemeHook();
+
   return (
-    <Main>
+    <Main $changeTheme={changeTheme}>
         {errorMessage
           ? (<LoadingCardsError />)
           : (<Container>

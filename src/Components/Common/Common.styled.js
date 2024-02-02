@@ -18,6 +18,7 @@ const Container = styled.div`
 `;
 
 const TextErrorAndLoading = styled.p`
+  color: ${(props) => (props.$changeTheme ? "#FFF" : "black")};
   text-align: center;
   font-size: 30px;
 `;
@@ -54,10 +55,6 @@ const hover03 = css`
   }
 `;
 
-const activeCategory = css`
-  opacity: 1 !important;
-`;
-
 const MessageError = styled.p`
   padding-top: 7px;
   color: #f84d4d;
@@ -77,6 +74,5 @@ export {
   hover01,
   hover03,
   hover02,
-  activeCategory,
   MessageError,
 };

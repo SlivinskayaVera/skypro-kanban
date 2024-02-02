@@ -48,12 +48,13 @@ const PopNewCardContainer = styled.div`
 const PopNewCardBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.$changeTheme ? "#20202C" : "#ffffff")};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid;
+  border-color: ${(props) => (props.$changeTheme ? "#4E5566" : "#d4dbe5")};
   position: relative;
 
   @media screen and (max-width: ${breakpoints.lg}px) {
@@ -81,7 +82,7 @@ const PopNewCardWrap = styled.div`
 `;
 
 const PopNewCardTtl = styled.h3`
-  color: #000;
+  color: ${(props) => (props.$changeTheme ? "#ffffff" : "#000")};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -119,7 +120,7 @@ const WrapperCalendar = styled.div`
   margin-bottom: 25px;
 
   p {
-    padding-left: 27px;
+    padding-left: 22px;
   }
 `;
 
@@ -218,7 +219,7 @@ const FormNewArea = styled.textarea`
 `;
 
 const SubTtl = styled.label`
-  color: #000;
+  color: ${(props) => (props.$changeTheme ? "#FFFFFF" : "#000")};
   font-size: 14px;
   font-weight: 600;
   font-style: normal;
@@ -238,9 +239,16 @@ const CategoriesTheme = styled.button`
   border-radius: 24px;
   margin-right: 7px;
   opacity: ${(props) => (props.$active ? 1 : 0.4)};
-  background-color: ${(props) =>
-    themeStyles[props.$themeColor].backgroundColor};
-  color: ${(props) => themeStyles[props.$themeColor].color};
+  background-color: ${({ $themeColor, $changeTheme }) =>
+    $changeTheme
+      ? themeStyles[$themeColor]?.color
+      : themeStyles[$themeColor]?.backgroundColor};
+
+  color: ${({ $themeColor }) => themeStyles[$themeColor]?.color || "#06b16e"};
+  color: ${({ $themeColor, $changeTheme }) =>
+    $changeTheme
+      ? themeStyles[$themeColor]?.backgroundColor
+      : themeStyles[$themeColor]?.color};
 
   p {
     font-size: 14px;

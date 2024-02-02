@@ -17,21 +17,20 @@ function App() {
     <PageWrapper>
       <GlobalStyle />
 
-        <Routes>
-          <Route element={<PrivateRoute />}>
-            <Route path={AppRoutes.HOME} element={<MainContent />}>
-              <Route path={AppRoutes.NEW_CARD} element={<PopNewCard />} />
-              <Route path={AppRoutes.EXIT} element={<PopExit />} />
-              <Route path={AppRoutes.CARD} element={<PopBrowse />} />
-              <Route path={AppRoutes.EDIT_CARD} element={<EditTaskPage />} />
-
-            </Route>
+      <Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path={AppRoutes.HOME} element={<MainContent />}>
+            <Route path={AppRoutes.NEW_CARD} element={<PopNewCard />} />
+            <Route path={AppRoutes.EXIT} element={<PopExit />} />
+            <Route path={AppRoutes.CARD} element={<PopBrowse />} />
+            <Route path={AppRoutes.EDIT_CARD} element={<EditTaskPage />} />
           </Route>
+        </Route>
 
-          <Route path={AppRoutes.SIGNIN} element={<SingInPage />} />
-          <Route path={AppRoutes.SINGUP} element={<SingUpPage />} />
-          <Route path={AppRoutes.NOT_FOUND} element={<Error404 />} />
-        </Routes>
+        <Route path={AppRoutes.SIGNIN} element={<SingInPage />} />
+        <Route path={AppRoutes.SINGUP} element={<SingUpPage />} />
+        <Route path={AppRoutes.NOT_FOUND} element={<Error404 />} />
+      </Routes>
     </PageWrapper>
   );
 }

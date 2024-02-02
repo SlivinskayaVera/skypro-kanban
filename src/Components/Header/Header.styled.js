@@ -9,7 +9,7 @@ const ExitBtn = styled.button`
 const StyledHeader = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.$changeTheme ? "#20202C" : "#ffffff")};
 `;
 
 const HeaderLogo = styled.div`
@@ -39,7 +39,7 @@ const HeaderNav = styled.nav`
 `;
 
 const PopUserSetName = styled.p`
-  color: #000;
+  color: ${(props) => (props.$changeTheme ? "#FFFFFF" : "#000")};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -62,7 +62,7 @@ const PopUserSetTheme = styled.div`
   margin-bottom: 30px;
 
   p {
-    color: #000;
+    color: ${(props) => (props.$changeTheme ? "#FFFFFF" : "#000")};
     font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.14px;
@@ -73,7 +73,7 @@ const PopUserSetTheme = styled.div`
     width: 24px;
     height: 13px;
     border-radius: 100px;
-    background: #eaeef6;
+    background: ${(props) => (props.$changeTheme ? "#FFF" : "#eaeef6")};
     outline: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -88,7 +88,8 @@ const PopUserSetTheme = styled.div`
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: #94a6be;
+    background-color: ${(props) =>
+      props.$changeTheme ? "#565EEF" : "#94a6be"};
     transition: 0.5s;
   }
 
@@ -106,11 +107,11 @@ const HeaderPopUserSet = styled.div`
   height: 205px;
   border-radius: 10px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: #fff;
-  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  background: ${(props) => (props.$changeTheme ? "#202229" : "#fff")};
   padding: 34px;
   text-align: center;
   z-index: 2;
+  box-shadow: 0px 10px 39px 0px rgba(148, 166, 190, 0.4);
 
   &:target {
     display: block;
@@ -122,10 +123,11 @@ const HeaderPopUserSet = styled.div`
     background: transparent;
     color: #565eef;
     border-radius: 4px;
-    border: 1px solid #565eef;
+    border: 1px solid;
+    border-color: ${(props) => (props.$changeTheme ? "#FFF" : "#565eef")};
   }
   a {
-    color: #565eef;
+    color: ${(props) => (props.$changeTheme ? "#FFF" : "#565eef")};
   }
 `;
 
@@ -170,7 +172,7 @@ const HeaderUser = styled.a`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565eef;
+  color: ${(props) => (props.$changeTheme ? "#FFF" : "#565eef")};
 
   &::after {
     content: "";
@@ -183,6 +185,7 @@ const HeaderUser = styled.a`
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;
+    border-color: ${(props) => (props.$changeTheme ? "#FFF" : "#565eef")};
   }
 
   ${hover02}

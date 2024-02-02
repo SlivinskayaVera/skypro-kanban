@@ -16,6 +16,7 @@ import {
 } from "./Header.styled";
 import { Container } from "../Common/Common.styled";
 import { UserHook } from "../../hooks/useUserHook";
+import { ThemeHook } from "../../hooks/useThemeHook";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,34 +28,47 @@ export default function Header() {
 
   const getUser = JSON.parse(user);
 
+  const { setChangeTheme, changeTheme } = ThemeHook();
+
+  function handleChangeTheme() {
+    setChangeTheme((previous) => !previous);
+  }
+
   return (
-    <StyledHeader>
+    <StyledHeader $changeTheme={changeTheme}>
       <Container>
         <HeaderBlock>
           <HeaderLogo className="_show _light">
             <Link to={AppRoutes.HOME}>
-              <img src="/images/logo.png" alt="logo" />
-            </Link>
-          </HeaderLogo>
-          <HeaderLogo className="_dark">
-            <Link to={AppRoutes.HOME}>
-              <img src="/images/logo_dark.png" alt="logo" />
+              <img
+                src={changeTheme ? "/images/logo_dark.png" : "/images/logo.png"}
+                alt="logo"
+              />
             </Link>
           </HeaderLogo>
           <HeaderNav>
             <HeaderBtnMainNew id="btnMainNew">
               <Link to={AppRoutes.NEW_CARD}>Создать новую задачу</Link>
             </HeaderBtnMainNew>
-            <HeaderUser onClick={openMenu}>{getUser.name}</HeaderUser>
+            <HeaderUser $changeTheme={changeTheme} onClick={openMenu}>
+              {getUser.name}
+            </HeaderUser>
             {isOpen && (
-              <HeaderPopUserSet id="user-set-target">
-                <PopUserSetName>{getUser.name}</PopUserSetName>
+              <HeaderPopUserSet $changeTheme={changeTheme} id="user-set-target">
+                <PopUserSetName $changeTheme={changeTheme}>
+                  {getUser.name}
+                </PopUserSetName>
                 <PopUserSetMail>{getUser.login}</PopUserSetMail>
-                <PopUserSetTheme>
+                <PopUserSetTheme $changeTheme={changeTheme}>
                   <p>Темная тема</p>
-                  <input type="checkbox" name="checkbox" />
+                  <input
+                    onChange={handleChangeTheme}
+                    type="checkbox"
+                    name="checkbox"
+                    checked={changeTheme}
+                  />
                 </PopUserSetTheme>
-                <ExitBtn type="button">
+                <ExitBtn $changeTheme={changeTheme} type="button">
                   <Link to={AppRoutes.EXIT}>Выйти</Link>
                 </ExitBtn>
               </HeaderPopUserSet>

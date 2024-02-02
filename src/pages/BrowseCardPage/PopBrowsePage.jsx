@@ -34,6 +34,7 @@ import {
   StatusThemeActive,
   StatusThemes,
 } from "../EditTaskPage/EditTaskPage.styled";
+import { ThemeHook } from "../../hooks/useThemeHook";
 
 export default function PopBrowse() {
   let { id } = useParams();
@@ -49,20 +50,28 @@ export default function PopBrowse() {
     navigate(AppRoutes.HOME);
   };
   const dataTask = cards.find((card) => card._id === id);
+  const { changeTheme } = ThemeHook();
 
   return (
     <StyledPopBrowse id="popBrowse">
       <PopBrowseContainer>
-        <PopBrowseBlock>
+        <PopBrowseBlock $changeTheme={changeTheme}>
           <PopBrowseContent>
             <PopBrowseTopBlock>
-              <PopBrowseTtl>{dataTask.title}</PopBrowseTtl>
-              <CategoriesTheme $active $hide $themeColor={dataTask.topic}>
+              <PopBrowseTtl $changeTheme={changeTheme}>
+                {dataTask.title}
+              </PopBrowseTtl>
+              <CategoriesTheme
+                $changeTheme={changeTheme}
+                $active
+                $hide
+                $themeColor={dataTask.topic}
+              >
                 {dataTask.topic}
               </CategoriesTheme>
             </PopBrowseTopBlock>
             <PopBrowseStatus>
-              <SubTtlP>Статус</SubTtlP>
+              <SubTtlP $changeTheme={changeTheme}>Статус</SubTtlP>
               <StatusThemes>
                 <StatusThemeActive>{dataTask.status}</StatusThemeActive>
               </StatusThemes>
@@ -70,18 +79,23 @@ export default function PopBrowse() {
             <PopBrowseWrap>
               <PopBrowseForm id="formBrowseCard" action="#">
                 <FormBrowseBlock>
-                  <SubTtl htmlFor="textArea01">Описание задачи</SubTtl>
+                  <SubTtl $changeTheme={changeTheme} htmlFor="textArea01">
+                    Описание задачи
+                  </SubTtl>
                   <FormBrowseArea
+                    $changeTheme={changeTheme}
                     name="text"
                     id="textArea01"
-                    readOnly=""
-                    placeholder="Введите описание задачи..."
+                    readOnly
+                    placeholder="Описание задачи"
                     defaultValue={dataTask.description}
                   />
                 </FormBrowseBlock>
               </PopBrowseForm>
               <WrapperCalendar>
-                <SubTtlP>Даты</SubTtlP>
+                <SubTtlP $changeTheme={changeTheme}>Даты</SubTtlP>
+                <style>{`.rdp {--rdp-cell-size: 30px; --rdp-caption-font-size: 14px; --rdp-selected-color: #FFF}; --rdp-accent-color: green;`}</style>
+
                 <DayPicker
                   showOutsideDays
                   mode="single"
@@ -101,10 +115,13 @@ export default function PopBrowse() {
             </ThemeDownCategories>
             <PopBrowseBtnBrowse>
               <ButtonGroup>
-                <ButtonActionForTest>
+                <ButtonActionForTest $changeTheme={changeTheme}>
                   <Link to={`/edit-card/${id}`}>Редактировать задачу</Link>
                 </ButtonActionForTest>
-                <ButtonActionForTest onClick={handlerDeleteTask}>
+                <ButtonActionForTest
+                  $changeTheme={changeTheme}
+                  onClick={handlerDeleteTask}
+                >
                   Удалить задачу
                 </ButtonActionForTest>
               </ButtonGroup>

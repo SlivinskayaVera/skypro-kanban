@@ -12,9 +12,11 @@ import {
 } from "./PopExit.styled";
 import { Link } from "react-router-dom";
 import { UserHook } from "../../hooks/useUserHook";
+import { ThemeHook } from "../../hooks/useThemeHook";
 
 export default function PopExit() {
   const { setUser } = UserHook();
+  const { changeTheme } = ThemeHook();
 
   function handlerExit() {
     localStorage.removeItem("token");
@@ -25,9 +27,9 @@ export default function PopExit() {
   return (
     <StyledPopExit id="popExit">
       <PopExitContainer>
-        <PopExitBlock>
+        <PopExitBlock $changeTheme={changeTheme}>
           <PopExitTtl>
-            <HeaderMedium>Выйти из аккаунта?</HeaderMedium>
+            <HeaderMedium $changeTheme={changeTheme}>Выйти из аккаунта?</HeaderMedium>
           </PopExitTtl>
           <PopExitForm id="formExit" action="#">
             <PopExitFormGroup>
@@ -40,7 +42,7 @@ export default function PopExit() {
               >
                 <Link to={AppRoutes.SIGNIN}>Да, выйти</Link>
               </PopExitExitYes>
-              <PopExitExitNo id="exitNo">
+              <PopExitExitNo $changeTheme={changeTheme} id="exitNo">
                 <Link to={AppRoutes.HOME}>Нет, остаться</Link>
               </PopExitExitNo>
             </PopExitFormGroup>

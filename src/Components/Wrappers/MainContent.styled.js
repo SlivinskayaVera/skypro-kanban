@@ -5,7 +5,7 @@ import { breakpoints } from "../Common/breakpoints";
 
 const Main = styled.main`
   width: 100%;
-  background-color: #eaeef6;
+  background-color: ${(props) => (props.$changeTheme ? "#151419" : "#eaeef6")};
 `;
 
 const MainBlock = styled.div`
