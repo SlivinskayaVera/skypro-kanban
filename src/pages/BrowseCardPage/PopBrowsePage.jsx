@@ -35,6 +35,7 @@ import {
   StatusThemes,
 } from "../EditTaskPage/EditTaskPage.styled";
 import { ThemeHook } from "../../hooks/useThemeHook";
+import { ru } from "date-fns/locale";
 
 export default function PopBrowse() {
   let { id } = useParams();
@@ -97,6 +98,7 @@ export default function PopBrowse() {
                 <style>{`.rdp {--rdp-cell-size: 30px; --rdp-caption-font-size: 14px; --rdp-selected-color: #FFF}; --rdp-accent-color: green;`}</style>
 
                 <DayPicker
+                  locale={ru}
                   showOutsideDays
                   mode="single"
                   // onSelect={setSelectedDay}
@@ -104,7 +106,10 @@ export default function PopBrowse() {
                   selected={new Date(dataTask.date)}
                 />
 
-                <p>Срок исполнения: {format(dataTask.date, "dd.MM.yyyy")}</p>
+                <p>
+                  <span>Срок исполнения: </span>{" "}
+                  {format(dataTask.date, "dd.MM.yyyy")}
+                </p>
               </WrapperCalendar>
             </PopBrowseWrap>
             <ThemeDownCategories>

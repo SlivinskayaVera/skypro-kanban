@@ -120,7 +120,18 @@ const WrapperCalendar = styled.div`
   margin-bottom: 25px;
 
   p {
+    font-size: 10px;
     padding-left: 22px;
+  }
+
+  span {
+    color: #94a6be;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 `;
 

@@ -30,6 +30,7 @@ import { UserHook } from "../../hooks/useUserHook";
 import { format } from "date-fns";
 import { SubTtlP } from "../BrowseCardPage/PopBrowsePage.styled";
 import { ThemeHook } from "../../hooks/useThemeHook";
+import { ru } from "date-fns/locale";
 
 export default function PopNewCard() {
   const { setCards } = TaskHook();
@@ -63,6 +64,8 @@ export default function PopNewCard() {
   if (isLoading) {
     return <LoadingCards />;
   }
+
+
   return (
     <StyledPopNewCard id="popNewCard">
       <PopNewCardContainer>
@@ -109,15 +112,19 @@ export default function PopNewCard() {
               </PopNewCardForm>
               <WrapperCalendar>
                 <SubTtlP $changeTheme={changeTheme}>Даты</SubTtlP>
-                <style>{`.rdp {--rdp-cell-size: 30px; --rdp-caption-font-size: 14px; --rdp-accent-color: #94A6BE;`}</style>
+                <style>{`.rdp {--rdp-cell-size: 30px; --rdp-caption-font-size: 14px; --rdp-selected-color: #FFF}; --rdp-accent-color: green;`}</style>
 
                 <DayPicker
+                  locale={ru}
                   mode="single"
                   onSelect={setSelectedDay}
                   required
                   selected={selectedDay}
                 />
-                <p>You selected {format(selectedDay, "dd.MM.yyyy")}.</p>
+                <p>
+                  <span>You selected </span> {format(selectedDay, "dd.MM.yyyy")}
+                  .
+                </p>
               </WrapperCalendar>
             </PopNewCardWrap>
             <PopNewCardCategories>

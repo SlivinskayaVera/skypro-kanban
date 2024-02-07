@@ -36,6 +36,7 @@ import {
   StatusThemes,
 } from "./EditTaskPage.styled";
 import { ThemeHook } from "../../hooks/useThemeHook";
+import { ru } from "date-fns/locale";
 
 export default function EditTaskPage() {
   let { id } = useParams();
@@ -83,7 +84,12 @@ export default function EditTaskPage() {
               <PopBrowseTtl $changeTheme={changeTheme}>
                 {newDataTask.title}
               </PopBrowseTtl>
-              <CategoriesTheme $changeTheme={changeTheme} $active $hide $themeColor={dataTask.topic}>
+              <CategoriesTheme
+                $changeTheme={changeTheme}
+                $active
+                $hide
+                $themeColor={dataTask.topic}
+              >
                 {dataTask.topic}
               </CategoriesTheme>
             </PopBrowseTopBlock>
@@ -150,14 +156,20 @@ export default function EditTaskPage() {
               </PopBrowseForm>
               <WrapperCalendar>
                 <SubTtlP $changeTheme={changeTheme}>Даты</SubTtlP>
+                <style>{`.rdp {--rdp-cell-size: 30px; --rdp-caption-font-size: 14px; --rdp-selected-color: #FFF}; --rdp-accent-color: green;`}</style>
+
                 <DayPicker
+                  locale={ru}
                   showOutsideDays
                   mode="single"
                   onSelect={setSelectedDay}
                   required
                   selected={selectedDay}
                 />
-                <p>Срок исполнения: {format(selectedDay, "dd.MM.yyyy")}</p>
+                <p>
+                  <span>Срок исполнения: </span>
+                  {format(selectedDay, "dd.MM.yyyy")}
+                </p>
               </WrapperCalendar>
             </PopBrowseWrap>
             <ThemeDownCategories>
@@ -169,10 +181,17 @@ export default function EditTaskPage() {
             <PopBrowseBtnEdit>
               <ButtonGroup>
                 <ButtonMenu onClick={handlerEditTask}>Сохранить</ButtonMenu>
-                <ButtonActionForTest $changeTheme={changeTheme} onClick={handlerCancelEditTask}>
+                <ButtonActionForTest
+                  $changeTheme={changeTheme}
+                  onClick={handlerCancelEditTask}
+                >
                   Отменить
                 </ButtonActionForTest>
-                <ButtonActionForTest $changeTheme={changeTheme} onClick={handlerDeleteTask} id="btnDelete">
+                <ButtonActionForTest
+                  $changeTheme={changeTheme}
+                  onClick={handlerDeleteTask}
+                  id="btnDelete"
+                >
                   Удалить задачу
                 </ButtonActionForTest>
               </ButtonGroup>

@@ -102,7 +102,7 @@ const SubTtl = styled.label`
 const SubTtlP = styled.p`
   color: ${(props) => (props.$changeTheme ? "#FFFFFF" : "black")};
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 14px !important;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
