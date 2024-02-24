@@ -23,7 +23,7 @@ const MainBlock = styled.div`
 const MainContentWrapper = styled.div`
   width: 100%;
   display: flex;
-
+  
   @media screen and (max-width: ${breakpoints.xl}px) {
     display: block;
   }

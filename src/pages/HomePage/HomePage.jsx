@@ -9,15 +9,17 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { TasksContext } from "../../contexts/tasksContext.jsx";
 import { Outlet } from "react-router-dom";
-import { getTasks } from "../../../api.js";
+import { editTasks, getTasks } from "../../../api.js";
 import { UserHook } from "../../hooks/useUserHook.js";
 import { TaskHook } from "../../hooks/useTaskHook.js";
 import LoadingCards from "../LoadingPagesForHomePage/LoadingCards.jsx";
 import LoadingCardsError from "../LoadingPagesForHomePage/LoadingCardsError.jsx";
 import { ThemeHook } from "../../hooks/useThemeHook.js";
+import { DragDropContext } from "react-beautiful-dnd";
 
 export default function MainContent() {
   const { cards } = useContext(TasksContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState(false);
   const { user } = UserHook();
@@ -31,28 +33,60 @@ export default function MainContent() {
 
   const { changeTheme } = ThemeHook();
 
+  const onDragEnd = async (result) => {
+    console.log(result);
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    setIsLoading(true);
+
+    const editCard = cards.find((card) => card._id === draggableId);
+
+    await editTasks({
+      setCards,
+      id: draggableId,
+      token: JSON.parse(user).token,
+      newDataTask: { ...editCard, status: destination.droppableId },
+    });
+    setIsLoading(false);
+
+  };
+
   return (
     <Main $changeTheme={changeTheme}>
-        {errorMessage
-          ? (<LoadingCardsError />)
-          : (<Container>
-            <MainBlock>
-              <Outlet />
-              {!cards ? (<LoadingCards />) : (
-                <MainContentWrapper>
+      {errorMessage ? (
+        <LoadingCardsError />
+      ) : (
+        <Container>
+          <MainBlock>
+            <Outlet />
+            {!cards || isLoading ? (
+              <LoadingCards />
+            ) : (
+              <MainContentWrapper>
+                <DragDropContext onDragEnd={onDragEnd}>
                   {statusList.map((status) => (
                     <Column
                       key={status}
+                      columnId={status}
                       title={status}
                       cardList={cards.filter((card) => card.status === status)}
                     />
                   ))}
-                </MainContentWrapper>
-              )}
-            </MainBlock>
-          </Container>)}
+                </DragDropContext>
+              </MainContentWrapper>
+            )}
+          </MainBlock>
+        </Container>
+      )}
     </Main>
   );
-
-
 }
