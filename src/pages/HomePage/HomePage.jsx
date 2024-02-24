@@ -34,7 +34,6 @@ export default function MainContent() {
   const { changeTheme } = ThemeHook();
 
   const onDragEnd = async (result) => {
-    console.log(result);
     const { destination, source, draggableId } = result;
 
     if (!destination) {

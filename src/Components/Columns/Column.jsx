@@ -4,20 +4,19 @@ import { MainColumn, ColumnTitle, Cards } from "./Column.styled.js";
 import { Droppable } from "react-beautiful-dnd";
 
 export default function Column({ title, cardList, columnId }) {
-
-  const [ enabled, setEnabled ] = useState(false);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
     return () => {
-       cancelAnimationFrame(animation);
-       setEnabled(false);
+      cancelAnimationFrame(animation);
+      setEnabled(false);
     };
   }, []);
 
   if (!enabled) {
-      return null;
+    return null;
   }
 
   return (
@@ -25,14 +24,10 @@ export default function Column({ title, cardList, columnId }) {
       <ColumnTitle>
         <p>{title}</p>
       </ColumnTitle>
-      <Cards>
-        <Droppable droppableId={columnId}>
-          {(provided) => (
-            <div
-              // className="task-list"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
+      <Droppable droppableId={columnId}>
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            <Cards>
               {cardList.map((card, index) => (
                 <CardTask
                   key={card._id}
@@ -44,10 +39,10 @@ export default function Column({ title, cardList, columnId }) {
                 />
               ))}
               {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </Cards>
+            </Cards>
+          </div>
+        )}
+      </Droppable>
     </MainColumn>
   );
 }
