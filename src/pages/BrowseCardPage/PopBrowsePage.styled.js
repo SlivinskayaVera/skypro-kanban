@@ -42,12 +42,13 @@ const PopBrowseContainer = styled.div`
 const PopBrowseBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.$changeTheme ? "#20202C" : "#ffffff")};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 38px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid;
+  border-color: ${(props) => (props.$changeTheme ? "#4E5566" : "#d4dbe5")};
   position: relative;
 
   @media screen and (max-width: ${breakpoints.lg}px) {
@@ -80,7 +81,7 @@ const PopBrowseTopBlock = styled.div`
 `;
 
 const PopBrowseTtl = styled.h3`
-  color: #000;
+  color: ${(props) => (props.$changeTheme ? "#ffffff" : "#000")};
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -92,20 +93,19 @@ const FormBrowseBlock = styled.div`
 `;
 
 const SubTtl = styled.label`
-  color: #000;
+  color: ${(props) => (props.$changeTheme ? "#FFFFFF" : "#000")};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
 `;
 
 const SubTtlP = styled.p`
-  color: black;
+  color: ${(props) => (props.$changeTheme ? "#FFFFFF" : "black")};
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 14px !important;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  padding-bottom: 14px;
 `;
 
 const FormBrowseArea = styled.textarea`
@@ -113,8 +113,10 @@ const FormBrowseArea = styled.textarea`
   width: 100%;
   outline: none;
   padding: 14px;
-  background: #eaeef6;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  background: ${(props) => (props.$changeTheme ? "#151419" : "#eaeef6")};
+  border: 0.7px solid;
+  border-color: ${(props) =>
+    props.$changeTheme ? "#151419" : "rgba(148, 166, 190, 0.4)"};
   border-radius: 8px;
   font-size: 14px;
   line-height: 1;
@@ -190,6 +192,12 @@ const ButtonMenu = styled.button`
 const ButtonActionForTest = styled.button`
   ${ButtonBor}
   ${hover03}
+  color: ${(props) => (props.$changeTheme ? "white" : "#565eef")};
+  border-color: ${(props) => (props.$changeTheme ? "white" : "#565eef")};
+
+  a {
+    color: ${(props) => (props.$changeTheme ? "white" : "#565eef")};
+  }
 `;
 
 const PopBrowseBtnBrowse = styled.div`

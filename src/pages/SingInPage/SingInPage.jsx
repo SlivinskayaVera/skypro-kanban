@@ -27,12 +27,13 @@ export default function SingInPage() {
 
   const { setUser } = UserHook();
 
-  const handlerLoginInApp = async (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
 
     try {
       if (!userInput.login || !userInput.password) {
         setErrorMessage(true);
+        setWrongUserData(true);
         return;
       }
       const userData = await loginInApp({
@@ -63,7 +64,7 @@ export default function SingInPage() {
               <h2>Вход</h2>
             </ModalTtl>
             <ModalFormLogin
-              onSubmit={handlerLoginInApp}
+              onSubmit={handleLoginSubmit}
               id="formLogIn"
               action="#"
             >
@@ -72,7 +73,7 @@ export default function SingInPage() {
                 type="text"
                 name="login"
                 id="formlogin"
-                placeholder="Логин"
+                placeholder="Эл. почта"
                 onChange={(e) =>
                   setUserInput({ ...userInput, login: e.target.value })
                 }
@@ -94,6 +95,7 @@ export default function SingInPage() {
               </MessageError>
               <ModalBtnEnter
                 disabled={wrongUserData}
+                $wrongUserData={wrongUserData}
                 type="submit"
                 id="btnEnter"
               >

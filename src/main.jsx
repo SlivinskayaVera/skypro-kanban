@@ -4,14 +4,17 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/userContext.jsx";
 import { TasksProvider } from "./contexts/tasksContext.jsx";
+import { ChangeThemeProvider } from "./contexts/themeContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <TasksProvider>
-        <UserProvider>
-          <App />
-        </UserProvider>
+        <ChangeThemeProvider>
+          <UserProvider>
+            <App />
+          </UserProvider>
+        </ChangeThemeProvider>
       </TasksProvider>
     </BrowserRouter>
   </React.StrictMode>

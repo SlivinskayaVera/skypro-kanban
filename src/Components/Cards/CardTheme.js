@@ -9,8 +9,16 @@ export const CardTheme = styled.div`
   border-radius: 18px;
   background-color: ${({ $themeColor }) =>
     themeStyles[$themeColor]?.backgroundColor || "#b4fdd1"};
+  background-color: ${({ $themeColor, $changeTheme }) =>
+    $changeTheme
+      ? themeStyles[$themeColor]?.color
+      : themeStyles[$themeColor]?.backgroundColor};
 
   ${ThemeP} {
     color: ${({ $themeColor }) => themeStyles[$themeColor]?.color || "#06b16e"};
+    color: ${({ $themeColor, $changeTheme }) =>
+      $changeTheme
+        ? themeStyles[$themeColor]?.backgroundColor
+        : themeStyles[$themeColor]?.color};
   }
 `;

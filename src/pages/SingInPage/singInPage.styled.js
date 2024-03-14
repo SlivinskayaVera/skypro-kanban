@@ -79,8 +79,8 @@ const ModalInput = styled.input`
   width: 100%;
   min-width: 100%;
   border-radius: 8px;
-  border: 0.7px solid
-    ${(props) => (props.$wrongUserData ? "red" : "rgba(148, 166, 190, 0.4)")};
+  border: 0.7px solid;
+  border-color: ${(props) => (props.$wrongUserData ? "red" : "rgba(148, 166, 190, 0.4)")};
   outline: none;
   padding: 10px 8px;
 
@@ -106,7 +106,7 @@ const ModalInput = styled.input`
 const ModalBtnEnter = styled.button`
   width: 100%;
   height: 30px;
-  background-color: #565eef;
+  background-color: ${(props) => (props.$wrongUserData ? "#94A6BE" : "#565eef")};
   border-radius: 4px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -122,7 +122,7 @@ const ModalBtnEnter = styled.button`
   color: #ffffff;
 
   &:hover {
-    background-color: #33399b;
+    background-color: ${(props) => (props.$wrongUserData ? "#94A6BE" : "#33399b")};
   }
 
   a {

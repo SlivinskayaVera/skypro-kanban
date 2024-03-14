@@ -29,6 +29,8 @@ import { TaskHook } from "../../hooks/useTaskHook";
 import { UserHook } from "../../hooks/useUserHook";
 import { format } from "date-fns";
 import { SubTtlP } from "../BrowseCardPage/PopBrowsePage.styled";
+import { ThemeHook } from "../../hooks/useThemeHook";
+import { ru } from "date-fns/locale";
 
 export default function PopNewCard() {
   const { setCards } = TaskHook();
@@ -44,7 +46,7 @@ export default function PopNewCard() {
 
   const navigate = useNavigate(null);
 
-  const handlerAddNewTask = async (event) => {
+  const handleAddNewTaskClick = async (event) => {
     event.preventDefault();
     if (!dataTask.nameTask || !dataTask.description || !dataTask.topic) return;
 
@@ -57,21 +59,29 @@ export default function PopNewCard() {
     navigate(AppRoutes.HOME);
   };
 
-  return isLoading ? (
-    <LoadingCards />
-  ) : (
+  const { changeTheme } = ThemeHook();
+
+  if (isLoading) {
+    return <LoadingCards />;
+  }
+
+  return (
     <StyledPopNewCard id="popNewCard">
       <PopNewCardContainer>
-        <PopNewCardBlock>
+        <PopNewCardBlock $changeTheme={changeTheme}>
           <PopNewCardContent>
-            <PopNewCardTtl>Создание задачи</PopNewCardTtl>
+            <PopNewCardTtl $changeTheme={changeTheme}>
+              Создание задачи
+            </PopNewCardTtl>
             <Link to={AppRoutes.HOME}>
               <PopNewCardClose>✖</PopNewCardClose>
             </Link>
             <PopNewCardWrap>
               <PopNewCardForm id="formNewCard" action="#">
                 <FormNewBlock>
-                  <SubTtl htmlFor="formTitle">Название задачи</SubTtl>
+                  <SubTtl $changeTheme={changeTheme} htmlFor="formTitle">
+                    Название задачи
+                  </SubTtl>
                   <FormNewInput
                     value={dataTask.nameTask}
                     type="text"
@@ -85,7 +95,9 @@ export default function PopNewCard() {
                   />
                 </FormNewBlock>
                 <FormNewBlock>
-                  <SubTtl htmlFor="textArea">Описание задачи</SubTtl>
+                  <SubTtl $changeTheme={changeTheme} htmlFor="textArea">
+                    Описание задачи
+                  </SubTtl>
                   <FormNewArea
                     name="text"
                     id="textArea"
@@ -98,21 +110,29 @@ export default function PopNewCard() {
                 </FormNewBlock>
               </PopNewCardForm>
               <WrapperCalendar>
+                <SubTtlP $changeTheme={changeTheme}>Даты</SubTtlP>
+                <style>{`.rdp {--rdp-cell-size: 30px; --rdp-caption-font-size: 14px; --rdp-selected-color: #FFF}; --rdp-accent-color: green;`}</style>
+
                 <DayPicker
-                  showOutsideDays
+                  locale={ru}
                   mode="single"
                   onSelect={setSelectedDay}
                   required
                   selected={selectedDay}
                 />
-                <p>You selected {format(selectedDay, "dd.MM.yyyy")}.</p>
+                <p>
+                  <span>You selected </span> {format(selectedDay, "dd.MM.yyyy")}
+                  .
+                </p>
               </WrapperCalendar>
             </PopNewCardWrap>
             <PopNewCardCategories>
-              <SubTtlP>Категория</SubTtlP>
+              <SubTtlP $changeTheme={changeTheme}>Категория</SubTtlP>
               <CategoriesThemes>
                 <CategoriesTheme
-                  onClick={() => setDataTask({...dataTask, topic: "Web Design"})}
+                  onClick={() =>
+                    setDataTask({ ...dataTask, topic: "Web Design" })
+                  }
                   $themeColor="Web Design"
                 >
                   <CategoryName $themeColor="Web Design">
@@ -121,13 +141,17 @@ export default function PopNewCard() {
                 </CategoriesTheme>
                 <CategoriesTheme
                   $themeColor="Research"
-                  onClick={() => setDataTask({...dataTask, topic: "Research"})}
+                  onClick={() =>
+                    setDataTask({ ...dataTask, topic: "Research" })
+                  }
                 >
                   <CategoryName $themeColor="Research">Research</CategoryName>
                 </CategoriesTheme>
                 <CategoriesTheme
                   $themeColor="Copywriting"
-                  onClick={() => setDataTask({...dataTask, topic: "Copywriting"})}
+                  onClick={() =>
+                    setDataTask({ ...dataTask, topic: "Copywriting" })
+                  }
                 >
                   <CategoryName $themeColor="Copywriting">
                     Copywriting
@@ -135,7 +159,7 @@ export default function PopNewCard() {
                 </CategoriesTheme>
               </CategoriesThemes>
             </PopNewCardCategories>
-            <FormNewCreate onClick={handlerAddNewTask} id="btnCreate">
+            <FormNewCreate onClick={handleAddNewTaskClick} id="btnCreate">
               Создать задачу
             </FormNewCreate>
           </PopNewCardContent>

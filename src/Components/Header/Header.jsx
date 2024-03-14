@@ -5,16 +5,14 @@ import {
   StyledHeader,
   HeaderBlock,
   HeaderNav,
-  PopUserSetName,
-  PopUserSetMail,
-  PopUserSetTheme,
-  HeaderPopUserSet,
   HeaderBtnMainNew,
   HeaderUser,
-  ExitBtn,
+  HeaderLogo,
 } from "./Header.styled";
 import { Container } from "../Common/Common.styled";
 import { UserHook } from "../../hooks/useUserHook";
+import { ThemeHook } from "../../hooks/useThemeHook";
+import { HeaderPopUser } from "../HeaderPopUser/HeaderPopUser";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,38 +23,29 @@ export default function Header() {
   }
 
   const getUser = JSON.parse(user);
+  const { changeTheme } = ThemeHook();
 
   return (
-    <StyledHeader>
+    <StyledHeader $changeTheme={changeTheme}>
       <Container>
         <HeaderBlock>
-          <div className="header__logo _show _light">
-            <Link to={AppRoutes.HOME} target="_self">
-              <img src="./public/images/logo.png" alt="logo" />
+          <HeaderLogo>
+            <Link to={AppRoutes.HOME}>
+              <img
+                src={changeTheme ? "/images/logo_dark.png" : "/images/logo.png"}
+                alt="logo"
+              />
             </Link>
-          </div>
-          <div className="header__logo _dark">
-            <Link to={AppRoutes.HOME} target="_self">
-              <img src="./public/images/logo_dark.png" alt="logo" />
-            </Link>
-          </div>
+          </HeaderLogo>
           <HeaderNav>
-            <HeaderBtnMainNew id="btnMainNew">
+            <HeaderBtnMainNew>
               <Link to={AppRoutes.NEW_CARD}>Создать новую задачу</Link>
             </HeaderBtnMainNew>
-            <HeaderUser onClick={openMenu}>{getUser.name}</HeaderUser>
+            <HeaderUser $changeTheme={changeTheme} onClick={openMenu}>
+              {getUser.name}
+            </HeaderUser>
             {isOpen && (
-              <HeaderPopUserSet id="user-set-target">
-                <PopUserSetName>{getUser.name}</PopUserSetName>
-                <PopUserSetMail>{getUser.login}</PopUserSetMail>
-                <PopUserSetTheme>
-                  <p>Темная тема</p>
-                  <input type="checkbox" name="checkbox" />
-                </PopUserSetTheme>
-                <ExitBtn type="button">
-                  <Link to={AppRoutes.EXIT}>Выйти</Link>
-                </ExitBtn>
-              </HeaderPopUserSet>
+              <HeaderPopUser login={getUser.login} name={getUser.name} />
             )}
           </HeaderNav>
         </HeaderBlock>

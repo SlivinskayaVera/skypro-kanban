@@ -35,6 +35,8 @@ import {
   StatusTheme,
   StatusThemes,
 } from "./EditTaskPage.styled";
+import { ThemeHook } from "../../hooks/useThemeHook";
+import { ru } from "date-fns/locale";
 
 export default function EditTaskPage() {
   let { id } = useParams();
@@ -51,7 +53,7 @@ export default function EditTaskPage() {
     date: dataTask.date,
   });
 
-  const handlerDeleteTask = async (event) => {
+  const handleDeleteTaskClick = async (event) => {
     event.preventDefault();
     const userData = JSON.parse(user);
     const token = userData.token;
@@ -59,7 +61,7 @@ export default function EditTaskPage() {
     navigate(AppRoutes.HOME);
   };
 
-  const handlerEditTask = async (event) => {
+  const handleEditTaskClick = async (event) => {
     event.preventDefault();
     const userData = JSON.parse(user);
     const token = userData.token;
@@ -67,23 +69,32 @@ export default function EditTaskPage() {
     navigate(`/card/${id}`);
   };
 
-  function handlerCancelEditTask() {
+  function handleCancelEditClick() {
     navigate(`/card/${id}`);
   }
+
+  const { changeTheme } = ThemeHook();
 
   return (
     <StyledPopBrowse id="popBrowse">
       <PopBrowseContainer>
-        <PopBrowseBlock>
+        <PopBrowseBlock $changeTheme={changeTheme}>
           <PopBrowseContent>
             <PopBrowseTopBlock>
-              <PopBrowseTtl>{newDataTask.title}</PopBrowseTtl>
-              <CategoriesTheme $active $hide $themeColor={dataTask.topic}>
+              <PopBrowseTtl $changeTheme={changeTheme}>
+                {newDataTask.title}
+              </PopBrowseTtl>
+              <CategoriesTheme
+                $changeTheme={changeTheme}
+                $active
+                $hide
+                $themeColor={dataTask.topic}
+              >
                 {dataTask.topic}
               </CategoriesTheme>
             </PopBrowseTopBlock>
             <PopBrowseStatus>
-              <SubTtlP>Статус</SubTtlP>
+              <SubTtlP $changeTheme={changeTheme}>Статус</SubTtlP>
               <StatusThemes>
                 <StatusTheme
                   onClick={() =>
@@ -125,8 +136,11 @@ export default function EditTaskPage() {
             <PopBrowseWrap>
               <PopBrowseForm id="formBrowseCard" action="#">
                 <FormBrowseBlock>
-                  <SubTtl htmlFor="textArea01">Описание задачи</SubTtl>
+                  <SubTtl $changeTheme={changeTheme} htmlFor="textArea01">
+                    Описание задачи
+                  </SubTtl>
                   <FormBrowseArea
+                    $changeTheme={changeTheme}
                     name="text"
                     id="textArea01"
                     placeholder="Введите описание задачи..."
@@ -141,14 +155,21 @@ export default function EditTaskPage() {
                 </FormBrowseBlock>
               </PopBrowseForm>
               <WrapperCalendar>
+                <SubTtlP $changeTheme={changeTheme}>Даты</SubTtlP>
+                <style>{`.rdp {--rdp-cell-size: 30px; --rdp-caption-font-size: 14px; --rdp-selected-color: #FFF}; --rdp-accent-color: green;`}</style>
+
                 <DayPicker
+                  locale={ru}
                   showOutsideDays
                   mode="single"
                   onSelect={setSelectedDay}
                   required
                   selected={selectedDay}
                 />
-                <p>Срок исполнения: {format(selectedDay, "dd.MM.yyyy")}</p>
+                <p>
+                  <span>Срок исполнения: </span>
+                  {format(selectedDay, "dd.MM.yyyy")}
+                </p>
               </WrapperCalendar>
             </PopBrowseWrap>
             <ThemeDownCategories>
@@ -159,11 +180,18 @@ export default function EditTaskPage() {
             </ThemeDownCategories>
             <PopBrowseBtnEdit>
               <ButtonGroup>
-                <ButtonMenu onClick={handlerEditTask}>Сохранить</ButtonMenu>
-                <ButtonActionForTest onClick={handlerCancelEditTask}>
+                <ButtonMenu onClick={handleEditTaskClick}>Сохранить</ButtonMenu>
+                <ButtonActionForTest
+                  $changeTheme={changeTheme}
+                  onClick={handleCancelEditClick}
+                >
                   Отменить
                 </ButtonActionForTest>
-                <ButtonActionForTest onClick={handlerDeleteTask} id="btnDelete">
+                <ButtonActionForTest
+                  $changeTheme={changeTheme}
+                  onClick={handleDeleteTaskClick}
+                  id="btnDelete"
+                >
                   Удалить задачу
                 </ButtonActionForTest>
               </ButtonGroup>

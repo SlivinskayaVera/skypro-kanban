@@ -16,7 +16,8 @@ const StatusThemes = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between;
+  padding-top: 14px;
   button:focus {
     background: #94a6be;
     color: #ffffff;

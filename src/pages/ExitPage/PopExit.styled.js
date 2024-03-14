@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { hover03 } from "../../Components/Common/Common.styled";
 import { breakpoints } from "../../Components/Common/breakpoints";
 
-const HeaderMedium = styled.h2``;
+const HeaderMedium = styled.h2`
+  color: ${(props) => (props.$changeTheme ? "white" : "black")};
+`;
 
 const StyledPopExit = styled.div`
   display: flex;
@@ -31,12 +33,13 @@ const PopExitContainer = styled.div`
 const PopExitBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.$changeTheme ? "#20202C" : "#ffffff")};
   max-width: 370px;
   width: 100%;
   padding: 50px 60px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid;
+  border-color: ${(props) => (props.$changeTheme ? "#4E5566" : "#d4dbe5")};
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
 
   @media only screen and (max-width: ${breakpoints.sm}px) {
@@ -111,7 +114,8 @@ const PopExitExitNo = styled.button`
   height: 30px;
   background-color: transparent;
   border-radius: 4px;
-  border: 0.7px solid var(--palette-navy-60, #565eef);
+  border: 0.7px solid;
+  border-color: ${(props) => props.$changeTheme ? "#FFF" : "#565eef"};
   outline: none;
   display: flex;
   align-items: center;
@@ -120,18 +124,17 @@ const PopExitExitNo = styled.button`
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
-  color: #ffffff;
-
+  
   ${hover03}
-
+  
   &:target {
     display: block;
   }
-
+  
   a {
     width: 100%;
     height: 100%;
-    color: #565eef;
+    color: ${(props) => props.$changeTheme ? "#FFF" : "#ffffff"};
     display: flex;
     align-items: center;
     justify-content: center;
