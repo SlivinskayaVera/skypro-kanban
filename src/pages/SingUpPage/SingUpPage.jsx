@@ -27,7 +27,7 @@ export default function SingUpPage() {
   });
   const { setUser } = UserHook();
 
-  const handlerRegistration = async (event) => {
+  const handleRegistrationSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -64,7 +64,7 @@ export default function SingUpPage() {
               <h2>Регистрация</h2>
             </ModalTtl>
             <ModalFormLogin
-              onSubmit={handlerRegistration}
+              onSubmit={handleRegistrationSubmit}
               id="formLogUp"
               action="#"
             >

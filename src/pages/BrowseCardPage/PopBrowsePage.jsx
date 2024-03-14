@@ -43,7 +43,7 @@ export default function PopBrowse() {
   const navigate = useNavigate(null);
   const { user } = UserHook();
 
-  const handlerDeleteTask = async (event) => {
+  const handleDeleteTaskClick = async (event) => {
     event.preventDefault();
     const userData = JSON.parse(user);
     const token = userData.token;
@@ -125,7 +125,7 @@ export default function PopBrowse() {
                 </ButtonActionForTest>
                 <ButtonActionForTest
                   $changeTheme={changeTheme}
-                  onClick={handlerDeleteTask}
+                  onClick={handleDeleteTaskClick}
                 >
                   Удалить задачу
                 </ButtonActionForTest>

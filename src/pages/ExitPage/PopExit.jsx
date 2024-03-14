@@ -18,7 +18,7 @@ export default function PopExit() {
   const { setUser } = UserHook();
   const { changeTheme } = ThemeHook();
 
-  function handlerExit() {
+  function handleExitClick() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
@@ -36,7 +36,7 @@ export default function PopExit() {
               <PopExitExitYes
                 onClick={(e) => {
                   e.preventDefault();
-                  handlerExit();
+                  handleExitClick();
                 }}
                 id="exitYes"
               >

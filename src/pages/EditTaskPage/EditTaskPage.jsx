@@ -53,7 +53,7 @@ export default function EditTaskPage() {
     date: dataTask.date,
   });
 
-  const handlerDeleteTask = async (event) => {
+  const handleDeleteTaskClick = async (event) => {
     event.preventDefault();
     const userData = JSON.parse(user);
     const token = userData.token;
@@ -61,7 +61,7 @@ export default function EditTaskPage() {
     navigate(AppRoutes.HOME);
   };
 
-  const handlerEditTask = async (event) => {
+  const handleEditTaskClick = async (event) => {
     event.preventDefault();
     const userData = JSON.parse(user);
     const token = userData.token;
@@ -69,7 +69,7 @@ export default function EditTaskPage() {
     navigate(`/card/${id}`);
   };
 
-  function handlerCancelEditTask() {
+  function handleCancelEditClick() {
     navigate(`/card/${id}`);
   }
 
@@ -180,16 +180,16 @@ export default function EditTaskPage() {
             </ThemeDownCategories>
             <PopBrowseBtnEdit>
               <ButtonGroup>
-                <ButtonMenu onClick={handlerEditTask}>Сохранить</ButtonMenu>
+                <ButtonMenu onClick={handleEditTaskClick}>Сохранить</ButtonMenu>
                 <ButtonActionForTest
                   $changeTheme={changeTheme}
-                  onClick={handlerCancelEditTask}
+                  onClick={handleCancelEditClick}
                 >
                   Отменить
                 </ButtonActionForTest>
                 <ButtonActionForTest
                   $changeTheme={changeTheme}
-                  onClick={handlerDeleteTask}
+                  onClick={handleDeleteTaskClick}
                   id="btnDelete"
                 >
                   Удалить задачу

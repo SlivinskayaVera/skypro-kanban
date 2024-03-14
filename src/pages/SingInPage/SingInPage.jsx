@@ -27,7 +27,7 @@ export default function SingInPage() {
 
   const { setUser } = UserHook();
 
-  const handlerLoginInApp = async (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -64,7 +64,7 @@ export default function SingInPage() {
               <h2>Вход</h2>
             </ModalTtl>
             <ModalFormLogin
-              onSubmit={handlerLoginInApp}
+              onSubmit={handleLoginSubmit}
               id="formLogIn"
               action="#"
             >

@@ -46,7 +46,7 @@ export default function PopNewCard() {
 
   const navigate = useNavigate(null);
 
-  const handlerAddNewTask = async (event) => {
+  const handleAddNewTaskClick = async (event) => {
     event.preventDefault();
     if (!dataTask.nameTask || !dataTask.description || !dataTask.topic) return;
 
@@ -64,7 +64,6 @@ export default function PopNewCard() {
   if (isLoading) {
     return <LoadingCards />;
   }
-
 
   return (
     <StyledPopNewCard id="popNewCard">
@@ -160,7 +159,7 @@ export default function PopNewCard() {
                 </CategoriesTheme>
               </CategoriesThemes>
             </PopNewCardCategories>
-            <FormNewCreate onClick={handlerAddNewTask} id="btnCreate">
+            <FormNewCreate onClick={handleAddNewTaskClick} id="btnCreate">
               Создать задачу
             </FormNewCreate>
           </PopNewCardContent>

@@ -10,11 +10,8 @@ import { ThemeHook } from "../../hooks/useThemeHook";
 import { AppRoutes } from "../../pages/appRoutes";
 
 export function HeaderPopUser({ login, name }) {
-  const { setChangeTheme, changeTheme } = ThemeHook();
+  const { handleThemeChange, changeTheme } = ThemeHook();
 
-  function handleChangeTheme() {
-    setChangeTheme((previous) => !previous);
-  }
   return (
     <HeaderPopUserSet $changeTheme={changeTheme}>
       <PopUserSetName $changeTheme={changeTheme}>{name}</PopUserSetName>
@@ -22,7 +19,7 @@ export function HeaderPopUser({ login, name }) {
       <PopUserSetTheme $changeTheme={changeTheme}>
         <p>Темная тема</p>
         <input
-          onChange={handleChangeTheme}
+          onChange={handleThemeChange}
           type="checkbox"
           name="checkbox"
           checked={changeTheme}
