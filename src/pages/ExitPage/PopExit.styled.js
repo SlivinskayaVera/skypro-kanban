@@ -134,7 +134,7 @@ const PopExitExitNo = styled.button`
   a {
     width: 100%;
     height: 100%;
-    color: ${(props) => props.$changeTheme ? "#FFF" : "#ffffff"};
+    color: ${(props) => props.$changeTheme ? "#FFF" : "#565EEF"};
     display: flex;
     align-items: center;
     justify-content: center;
